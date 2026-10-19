@@ -58,11 +58,25 @@ Prothesis Basic is the face for everything else. No other font appears in any `f
 
 **Sizes** (desktop / phone): H1 opening line 40/30 px bold · section headings 22/20 px bold · body 18/17 px, line-height 1.6 · tagline 20/18 px Prothesis Scripture italic in Goat's Hair, smaller than the logo · quote blocks 20/18 px · attributions 15 px Slate Blue.
 
-**Layout, top to bottom:** a full-width **Navy opening band** holding the light logo (`assets/img/logo-primary-light.png`, about 260 px wide on desktop, 200 px on phone) and the tagline in Pure Gold, centred, with generous space above and below (about 72 px desktop, 48 px phone) → on Linen: opening → Calling → Meaning comes from His Word → Our first app → The name → Mission → From the founder → Close → Contact → footer. Each section separated by generous space and a thin Goat's Hair rule. Quotes as indented blocks with the attribution on its own line. The last line of Close ("Christ magnified, in the ordinary places where people work.") stands alone, slightly larger, centred. **Our first app:** "Coming soon." as a small all-caps label in Goat's Hair; the button a solid Navy rectangle with Linen text (no rounded pill, no shadow), small print beneath in Slate Blue.
+**Layout, top to bottom:** a full-width **Navy opening band** holding the light logo (`assets/img/logo-primary-light.png`, about 260 px wide on desktop, 200 px on phone) and the tagline in Pure Gold, centred, with generous space above and below (about 72 px desktop, 48 px phone) → on Linen: opening → Calling → Meaning comes from His Word → Our first app → The name → Mission → From the founder → Close → Contact → footer. Each section separated by generous space and a thin Goat's Hair rule. Quotes as indented blocks with the attribution on its own line. The last line of Close ("Christ magnified, in the ordinary places where people work.") stands alone, slightly larger, centred. **Our first app:** "Coming soon." as a small all-caps label in deepened Goat's Hair `#7A5A3B`; the button a solid Navy rectangle with **Pure Gold** text (no rounded pill, no shadow), small print beneath in Slate Blue.
+
+## Design principles
+
+Applied from *Give Me 7 Minutes & Your Web Design Skills Will Take Off* (Self-Made Web Designer, 2025). Each line says how it applies to this page.
+
+1. **Visual hierarchy, not a forced reading pattern.** People scan in many patterns. In every section the most important element is the biggest and boldest; everything else is turned down. Order of weight on this page: the H1 "Discover and live out your true purpose." → section headings → the mission sentence and the closing line → body text → attributions and small print.
+2. **The button is the loudest thing in its section.** "Join the waitlist" is a solid, filled button (never an outline-only "ghost" button), high-contrast against the page: Navy fill, Pure Gold text. It is the only filled button on the site.
+3. **Contrast for every reader.** All text meets WCAG AA: at least **4.5:1** for normal text and 3:1 for large text (24 px+, or 18.7 px+ bold). Measured pairs: Navy on Linen ≈16:1 · Slate Blue on Linen ≈5:1 · Royal Purple on Linen passes · Pure Gold on Navy ≈9:1 · deepened Goat's Hair `#7A5A3B` on Linen ≈5.6:1. **Goat's Hair `#9A734D` on Linen is only ≈3.8:1 — use it for rules and decoration, never for text smaller than 24 px.**
+4. **60-30-10 colour balance.** About 60% neutral (the Linen page), 30% brand (Navy: the opening band and all text), 10% accent (Pure Gold and Goat's Hair: the tagline, the button text, the thin rules, the quote bars). The accent is never used for large areas.
+5. **Three text levels, used honestly.** One H1, describing what the page is about. H2s divide the page into its sections. Paragraph text is plain Prothesis Basic — never decorative — so it stays easy to read.
+6. **Built for scanning.** Headings carry the meaning on their own; paragraphs stay short; generous space between sections; text column no wider than ~680 px (about 65–75 characters a line).
+7. **Clarity, then motivation, then one clear next step.** The first screen says who this is (logo, tagline) and what it is about (the H1). The page builds the reason to care (Calling, Meaning comes from His Word) before it asks for anything, and asks for one thing only: joining the waitlist.
+8. **Designed for the people who will read it** — Christian professionals asking what their life and work are for — not for decoration. Calm, sober, confident: no animation, no carousels, no pop-ups, no stock imagery.
 
 ## Check before finishing
 
 - Open the page at 360 px and 1280 px wide; nothing overlaps or scrolls sideways.
+- Every text colour pair meets the contrast figures in Design principles §3; no small text in `#9A734D`.
 - Every font file loads (no 404s), and no request leaves the domain.
 - Search the built files for "Consulting" and "lorem": none present. "Coming soon" appears exactly once, in the Our first app section.
 - No product or app name appears anywhere; the app is called only "our first app" / "this app".
