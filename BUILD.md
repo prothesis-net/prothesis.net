@@ -60,7 +60,7 @@ No other font appears in any `font-family` stack, with one exception. **πρόθ
 
 A full-width Navy band holding, centred: the logo (linked to `/`, `width="2373" height="335"` in the HTML with CSS `width: 260px; height: auto` — 200 px on phones), then the tagline in Prothesis Scripture italic, Pure Gold, 20 px (18 px on phones), 18 px below the logo. Below them runs **the golden arc**: the top edge of a very large circle, a thin gold line with a soft glow, along which a short bright glint slides slowly. It is the only motion on the site.
 
-Band padding: 72 px top, 150 px bottom (phones: 48 px top, 120 px bottom). `position: relative; overflow: hidden`. The logo and tagline get `position: relative; z-index: 1`.
+Band padding: 72 px top, 150 px bottom (phones: 48 px top, 100 px bottom). `position: relative; overflow: hidden`. The logo and tagline get `position: relative; z-index: 1`.
 
 Put this SVG as the last child of the band, exactly as written:
 
@@ -109,6 +109,12 @@ The glint animates `transform` only; nothing else on any page moves. Under reduc
 - **Our first app:** "Coming soon." label 13 px bold, uppercase via CSS, letter-spacing .12em, deepened Goat's Hair, 14 px above the text. The button: a solid Navy rectangle, Pure Gold bold text, padding 14 px × 26 px, at least 48 px tall, square corners, no shadow, no outline-only style. Small print beneath in Slate Blue italic, 15 px.
 - **Links:** Navy, underlined (underline in Goat's Hair, offset 3 px). In the footer, links take the footer's Slate Blue.
 - **Focus:** every link and the button show `:focus-visible` as a 2 px Navy outline with 3 px offset (on Navy backgrounds use Pure Gold).
+- **Phones (from the mobile check, 320–390 px measured):**
+  - `h1, h2, .mission, .final { text-wrap: balance; }` — at 320 px the closing line otherwise leaves "work." alone on a third line.
+  - Small links get a larger tap area without moving the layout: `.fine a, footer a, .contact a { display: inline-block; padding: 10px 4px; margin: -10px -4px; }`.
+  - The button: `margin: 10px 0 16px`.
+  - At 360 px and below, quote blocks: `padding-left: 14px; font-size: 17px`.
+  - In the footer, keep each item whole: wrap each of the five items in a `<span>` with `white-space: nowrap`, so lines break only at the en dashes.
 - **Footer:** centred, max width 680 px, 1 px Goat's Hair rule above, 28 px padding top, 56 px bottom, 15 px Slate Blue text; wraps cleanly on narrow phones.
 
 ## Design principles
