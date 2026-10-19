@@ -38,19 +38,22 @@ Refined, minimal, mature. Lots of space. One accent colour at a time. No illustr
 | Slate Blue | `#526C7C` | Attribution lines under quotes; footer text |
 | Royal Purple | `#4B2540` | Scripture quotations only |
 
-**Font: Poppins** (in `assets/fonts/`, self-hosted with `@font-face`, `font-display: block`). Poppins is licensed under the SIL Open Font License 1.1; the licence is `assets/fonts/OFL.txt` and must stay in the repository.
+**Fonts** (in `assets/fonts/`, self-hosted with `@font-face`, `font-display: block` — never `swap`):
 
 | Font file | Family name | Use |
 |---|---|---|
-| `poppins-regular.woff2` | Poppins, 400 | Body text |
-| `poppins-italic.woff2` | Poppins, 400 italic | Emphasis; the tagline; the Guinness quote, the founder's quote and the two Scripture phrases in "The name" |
-| `poppins-bold.woff2` | Poppins, 700 | Headings, the opening line, the mission sentence |
+| `prothesis-basic-regular.woff2` | Prothesis Basic, 400 | Body text |
+| `prothesis-basic-italic.woff2` | Prothesis Basic, 400 italic | Emphasis; the Guinness quote and the founder's quote |
+| `prothesis-basic-bold.woff2` | Prothesis Basic, 700 | Headings, the opening line, the mission sentence |
+| `prothesis-scripture-italic.woff2` | Prothesis Scripture, 400 italic | **Only** two places: the tagline, and the two Scripture phrases in "The name" (Romans 8:28, Ephesians 1:11) |
 
-Poppins is the only face on the page, with one exception.
+Prothesis Basic is the face for everything else. No other font appears in any `font-family` stack except the one exception below.
 
-**The one exception — the Greek word πρόθεσις.** Poppins has no Greek letters. Wrap the Greek word in `<span lang="grc" class="greek">` and give `.greek` the stack `"Times New Roman", Georgia, serif` so it renders in a plain serif. This is the only text on the page not set in Poppins.
+**The one exception — the Greek word πρόθεσις.** Neither Prothesis font contains Greek letters. Wrap the Greek word in `<span lang="grc" class="greek">` and give `.greek` the stack `"Times New Roman", Georgia, serif` so it renders in a plain serif. This is the only text on the page not set in a Prothesis font.
 
-**Sizes** (desktop / phone): H1 opening line 40/30 px bold · section headings 22/20 px bold · body 18/17 px, line-height 1.6 · tagline 20/18 px italic in Goat's Hair, smaller than the logo · quote blocks 20/18 px · attributions 15 px Slate Blue.
+**Characters the fonts lack.** Neither font has a middle dot (·); the footer uses en dashes (–), as written in CONTENT.md. Prothesis Scripture has no straight quotes, apostrophes or em dashes: keep quotation marks and dashes around Scripture phrases in Prothesis Basic, and set only the words of the phrase in Prothesis Scripture.
+
+**Sizes** (desktop / phone): H1 opening line 40/30 px bold · section headings 22/20 px bold · body 18/17 px, line-height 1.6 · tagline 20/18 px Prothesis Scripture italic in Goat's Hair, smaller than the logo · quote blocks 20/18 px · attributions 15 px Slate Blue.
 
 **Layout, top to bottom:** logo (about 260 px wide on desktop, 200 px on phone) and tagline, centred → opening → Calling → Meaning comes from His Word → The name → Mission → From the founder → Close → Contact → footer. Each section separated by generous space and an optional thin Goat's Hair rule. Quotes as indented blocks with the attribution on its own line. The last line of Close ("Christ magnified, in the ordinary places where people work.") stands alone, slightly larger, centred.
 
