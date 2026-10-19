@@ -12,7 +12,9 @@ Build the page from this text exactly. Do not rewrite, shorten, or "improve" any
 
 ## Header
 
-Logo: `assets/img/logo-primary.png` (alt text: "Prothesis")
+This section sits in the Navy opening band (see BUILD.md).
+
+Logo: `assets/img/logo-primary-light.png` (alt text: "Prothesis")
 
 Tagline, beneath the logo: *Translation ignites purpose.*
 
@@ -41,6 +43,18 @@ This is not a program. It is a daily practice: reading Scripture slowly, in the 
 And it is not done alone. What one person hears is witnessed and carried by others, so that purpose, once found, is lived out in company.
 
 Prothesis builds the software tools and gathers the groups for that practice.
+
+## Our first app
+
+Coming soon.
+
+Hearing God by reflecting on His Word, and holding on to what He speaks to you, in your life and in your work.
+
+Leave your email and we’ll let you know when it’s ready.
+
+Button: **Join the waitlist** — a link to the waitlist form: `WAITLIST_FORM_URL` (opens in a new tab).
+
+Small print under the button: *We’ll only write to you about this app. Unsubscribe any time.* · *Privacy* (a link to `/privacy`)
 
 ## The name
 
@@ -75,4 +89,28 @@ Write to us: contact@prothesis.net (a `mailto:` link)
 
 ## Footer
 
-Prothesis LLC – Greater Chicago area, Illinois – contact@prothesis.net – © 2026 Prothesis LLC
+Prothesis LLC – Greater Chicago area, Illinois – contact@prothesis.net – © 2026 Prothesis LLC – Privacy (a link to `/privacy`)
+
+---
+
+# The privacy page (`privacy.html`, served at /privacy)
+
+Same Navy header band and footer as the home page.
+
+## Privacy
+
+*Last updated: 19 October 2026*
+
+**Who we are.** This website belongs to Prothesis LLC, based in the greater Chicago area, Illinois. You can reach us at contact@prothesis.net.
+
+**What we collect.** This website does not use cookies, analytics or trackers. If you join our waitlist, we collect the email address you give us, and nothing else.
+
+**Why.** We use your email only to tell you when our app is ready and to send occasional news about it. We do not sell, rent or share your email with anyone else.
+
+**Where it is kept.** Waitlist sign-ups are collected through Microsoft Forms and stored in our Microsoft 365 account. Microsoft processes this data for us under its own privacy terms.
+
+**Your choices.** You can ask us to remove your email at any time by writing to contact@prothesis.net, and every email we send will include a way to unsubscribe.
+
+**Changes.** If this page changes, we will update the date at the top.
+
+Prothesis LLC · contact@prothesis.net
