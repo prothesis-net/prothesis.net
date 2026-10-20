@@ -13,7 +13,7 @@ Build the pages from this text exactly. Do not rewrite, shorten, reorder or "imp
 
 # Home page (`index.html`)
 
-[NOTE: Browser tab title: `Prothesis LLC`]
+[NOTE: Browser tab title: `Prothesis`]
 
 [NOTE: Meta description: `Prothesis helps people discover & live out their true purpose — the call to God Himself, & the call into their work — through a daily practice in His Word, in community with others. Greater Chicago area, Illinois.`]
 
@@ -183,7 +183,7 @@ Prothesis LLC – Greater Chicago area, Illinois – contact@prothesis.net – �
 
 # Privacy page (`privacy.html`, reached at `/privacy`)
 
-[NOTE: Browser tab title: `Privacy – Prothesis LLC`. The short Navy band (logo linked to `/`, tagline, golden arc) and the same footer as the home page. "Privacy" below is this page's H1. This page's wording was approved 2026-10-19 and is unchanged.]
+[NOTE: Browser tab title: `Privacy – Prothesis`. The short Navy band (logo linked to `/`, tagline, golden arc) and the same footer as the home page. "Privacy" below is this page's H1. This page's wording was approved 2026-10-19 and is unchanged.]
 
 # Privacy
 
@@ -205,7 +205,7 @@ Prothesis LLC – Greater Chicago area, Illinois – contact@prothesis.net – �
 
 # Not-found page (`404.html`)
 
-[NOTE: Browser tab title: `Page not found – Prothesis LLC`. The short Navy band and the footer.]
+[NOTE: Browser tab title: `Page not found – Prothesis`. The short Navy band and the footer.]
 
 # This page doesn’t exist.
 
