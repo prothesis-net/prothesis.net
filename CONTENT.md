@@ -1,8 +1,13 @@
-# prothesis.net — page content (approved 2026-10-19)
+# prothesis.net — page content (v3, 2026-10-20)
 
-Build the pages from this text exactly. Do not rewrite, shorten, reorder or "improve" any sentence.
+Build the pages from this text exactly. Do not rewrite, shorten, reorder or "improve" any sentence. These are Albert's words as he left them in the v3 layout decks on 2026-10-20 (desktop and mobile agree; where line breaks differ, they are layout only).
 
-**How to read this file.** Everything in a `[NOTE: …]` is an instruction to the builder and is **never shown on the page**. Lines starting with `###` are visible headings on the page; lines starting with `##` are labels for the builder and are **not** shown.
+**How to read this file.**
+- Everything in a `[NOTE: …]` is an instruction to the builder and is **never shown on the page**.
+- `##` lines are builder labels (chapter names) and are **not** shown.
+- A `#` line that names a file — `# Home page (…)`, `# Privacy page (…)`, `# Not-found page (…)` — and this file's own title are labels, not page text. Otherwise `#` is the page's one visible H1. `KICKER:` lines are the small uppercase chapter labels (shown, styled per BUILD.md).
+- Keep every curly quote, apostrophe, en dash (–), em dash (—) and **&** exactly. Each "&" is tied to the word after it with a non-breaking space (`&amp;&nbsp;word`) so it never ends a line.
+- `{LOGO}` means the logo image on its own line (BUILD.md, "The logo inline").
 
 ---
 
@@ -10,100 +15,163 @@ Build the pages from this text exactly. Do not rewrite, shorten, reorder or "imp
 
 [NOTE: Browser tab title: `Prothesis LLC`]
 
-[NOTE: Meta description: `Prothesis helps people discover and live out their true purpose — the call to God Himself, and the call into their work — through a daily practice in His Word, in company with others. Greater Chicago area, Illinois.`]
+[NOTE: Meta description: `Prothesis helps people discover & live out their true purpose — the call to God Himself, & the call into their work — through a daily practice in His Word, in community with others. Greater Chicago area, Illinois.`]
 
-## Header band
+## 1 · Opening — Navy
 
-[NOTE: The Navy opening band with the golden arc — see BUILD.md "The opening band". Logo: `assets/img/logo-primary-light.png`, alt text "Prothesis", linked to `/`.]
+[NOTE: Logo `assets/img/logo-primary-light.png`, alt "Prothesis", linked to `/`, at the top. Tagline beneath it. The golden arc across the bottom of the chapter.]
 
 *Translation ignites purpose*
 
-[NOTE: The line above is the tagline, directly beneath the logo.]
+[NOTE: The line above is the tagline: Prothesis Scripture italic, Pure Gold. No closing period (Albert, 2026-10-20).]
 
-## Opening
+# Discover & live out your true purpose.
 
-[NOTE: The H1 below is the page's only H1. The Opening sits on Linen, below the band.]
+## 2 · The question — Navy
 
-# Discover and live out your true purpose.
+Most of us live by whatever drives us hardest.
 
-Most of us live by whatever drives us hardest. The next deadline, the next role, the next thing that has to get done. Over the years a life gets assembled out of other people’s demands, and underneath it sits a quieter question: *is there a reason I am here, and does my work have anything to do with it?*
+The next deadline, the next role, the next thing that has to get done. Over the years a life gets assembled out of other people’s demands, but underneath it sits a quieter question:
+
+Is there a reason I am here, & does my work have anything to do with it?
+
+[NOTE: The question above is set large, italic, Pure Gold.]
 
 Prothesis exists for that question.
 
-### Calling
+## 3 · Calling — Royal Purple
+
+KICKER: Calling
 
 > “Calling is the truth that God calls us to Himself so decisively that everything we are, everything we do, and everything we have is invested with a special devotion and dynamism lived out as a response to His summons and service.”
 >
 > — Os Guinness, *The Call*
 
-We take that in two parts. First, the call to God Himself: the personal relationship from which everything else follows. Second, the call into your work: the specific work He has for you, which only makes sense in the light of the first.
+**First, the call to God Himself.**
+The personal relationship with Jesus from which everything else follows.
 
-Prothesis helps people discover both, and live them out together.
+**Second, the call into your work.**
+The specific work Christ has for you, which only makes sense in the light of the First.
 
-### Meaning comes from His Word
+[NOTE: The two calls sit side by side on desktop, stacked on phones. Each: the bold line, then the sentence beneath. "First" is capitalised in "the light of the First" on purpose.]
 
-This is not a program. It is a daily practice: reading Scripture slowly, in the morning, and letting God speak through it. Over time the personal meaning of what He is calling you to — in your life, and in your work — becomes clear. Not borrowed from someone else’s answer. Heard for yourself.
+Prothesis helps people discover both, & live them out together.
 
-And it is not done alone. What one person hears is witnessed and carried by others, so that purpose, once found, is lived out in company.
+## 4 · Meaning comes from His Word — Living Water
 
-Prothesis builds the software tools and gathers the groups for that practice.
+KICKER: Meaning comes from His Word
 
-### Our first app
+Translation ignites purpose.
 
-Coming soon.
+[NOTE: This headline keeps its period (Albert, 2026-10-20). Only the tagline under the logo drops it.]
 
-[NOTE: "Coming soon." is a small label. Keep the source text exactly "Coming soon." and make it uppercase with CSS `text-transform: uppercase`.]
+It is an old word, & it means more than words.
 
-Hearing God by reflecting on His Word, and holding on to what He speaks to you, in your life and in your work.
+***translatio***
+Latin: *trans*, across — *latus*, carried. **A carrying across.**
 
-Leave your email and we’ll let you know when it’s ready.
+> “Who hath delivered us from the power of darkness, and hath translated us into the kingdom of His dear Son.”
+>
+> Colossians 1:13, KJV — Greek μεθίστημι (*methistēmi*): to move someone from one place to another
+
+[NOTE: The verse words are Prothesis Scripture italic. μεθίστημι is the plain-serif Greek exception (BUILD.md). The verse keeps "and" — quotations are never changed to "&".]
+
+That is what happens when His Word is read slowly & heard for yourself: meaning is carried across — from the page into a life, & from a life into its work. Purpose is not invented there. It is ignited.
+
+And what is carried in is carried out.
+
+[NOTE: The line above is set large and bold, standing alone.]
+
+This is not a program. It is a word from Scripture, received each morning & walked out through the day — obeyed in the ordinary moments of life & work, hearing & doing held together. Heard for yourself, not borrowed from someone else’s answer. And not done alone: what one person hears is witnessed & carried by others, so that purpose, once found, is lived out in community.
+
+{LOGO}
+builds the software tools & gathers community for that practice.
+
+Painting: Yudianto Prabowo
+
+[NOTE: The painting credit — small quiet text at the foot of the chapter (BUILD.md, "Backgrounds").]
+
+## 5 · Our first app — Navy
+
+KICKER: Our first app — coming soon
+
+Hearing God by reflecting on His Word, & holding on to what He speaks to you, in your life & in your work.
+
+Leave your email & we’ll let you know when it’s ready.
 
 Join the waitlist
 
-[NOTE: "Join the waitlist" is the button: an `<a>` linking to `WAITLIST_FORM_URL`, `target="_blank" rel="noopener"`, `aria-label="Join the waitlist (opens in a new tab)"`.]
+[NOTE: "Join the waitlist" is the button: an `<a>` to `https://forms.cloud.microsoft/r/uGidT0636d`, `target="_blank" rel="noopener"`, `aria-label="Join the waitlist (opens in a new tab)"`. No product or app name anywhere — it is held until the trademark is settled.]
 
-*We’ll only write to you about this app. Unsubscribe any time.*
+*We’ll only write to you about this phone app. Unsubscribe any time.* – Privacy
 
-Privacy
+[NOTE: One line of small print under the button. "Privacy" links to `/privacy`.]
 
-[NOTE: The small-print sentence and the word "Privacy" sit on one line under the button, separated by an en dash: `We’ll only write to you about this app. Unsubscribe any time. – Privacy`. "Privacy" links to `/privacy`.]
+Painting: Yudianto Prabowo
 
-### The name
+[NOTE: The painting credit — small quiet text at the foot of the chapter (BUILD.md, "Backgrounds").]
 
-Prothesis is the Greek πρόθεσις (*prothesis*): a purpose set forth beforehand. It is the word Scripture uses for God’s own purpose — “called according to His purpose” (Romans 8:28); “the purpose of Him who works all things according to the counsel of His will” (Ephesians 1:11). It is also the word for the bread of the Presence, set continually before the Lord.
+## 6 · The name — Linen
+
+KICKER: The name
+
+πρόθεσις
+
+Prothesis: a purpose set forth beforehand.
+
+[NOTE: πρόθεσις very large, plain serif (BUILD.md). The line beneath: on desktop "Prothesis : a purpose set forth beforehand." may set the colon apart as in the deck; on phones "Prothesis" sits on its own line above "a purpose set forth beforehand." with no colon. Either way the word is plain "Prothesis" in the line's own type — not the logo.]
+
+It is the word Scripture uses for God’s own purpose —
+“called according to His purpose” – Romans 8:28
+“the purpose of Him who works all things according to the counsel of His will” – Ephesians 1:11
+It is also the word for the bread of the Presence, set continually before the Lord.
+
+[NOTE: Four lines, each its own line. Only the words inside the quotation marks are Prothesis Scripture italic in Royal Purple; the quotation marks and "– Romans 8:28" / "– Ephesians 1:11" stay in Prothesis Basic, Navy.]
 
 A purpose that is His, set before us, kept in His presence. That is what we are named for.
 
-[NOTE: πρόθεσις is the plain-serif exception (BUILD.md). The two Scripture phrases — only the words inside the quotation marks — are Prothesis Scripture italic in Royal Purple; the quotation marks and the references "(Romans 8:28)" and "(Ephesians 1:11)" stay in Prothesis Basic, Navy.]
+## 7 · Mission — Genesis Earth
 
-### Mission
+KICKER: Mission
 
-**Prothesis equips called stewards to carry God’s wisdom and compassion into the marketplace.**
+{LOGO}
+equips called stewards to carry God’s wisdom & compassion into the marketplace.
 
-- transformed by understanding their consecrated purpose
-- living out God’s favor in the context of their work
-- multiplying God’s favor across industries, communities, and societies
+1 transformed by understanding their consecrated purpose
+2 living out God’s favor in the context of their work
+3 multiplying God’s favor across industries, communities, & societies
 
-### From the founder
+[NOTE: A three-step ladder: each line with its number in Pure Gold bold, thin rules between.]
 
-> “My relationship with Jesus changed when I read His words — patiently — and God produced heartfelt meaning out of them. Including the work He called me into.”
+Painting: Yudianto Prabowo
+
+[NOTE: The painting credit — small quiet text at the foot of the chapter (BUILD.md, "Backgrounds").]
+
+## 8 · From the founder — Sea Cow
+
+KICKER: From the founder
+
+> “My relationship with Jesus changed when I read His Word — patiently — and God produced heartfelt meaning out of it. Including the work He called me into.”
 >
 > — Albert Lee, founder
 
-## Close
+## 9 · Close — Navy
 
-What Prothesis is for is not better work, though the work changes. It is a person in whom Christ can be seen — heard, walked with, obeyed — until His light is visible in His people.
+What Prothesis is for is not better work, though the work changes. It is a person in whom Christ can be seen — heard, walked with, obeyed — shining His light in His people.
 
 Christ magnified, in the ordinary places where people work.
 
-[NOTE: The last line stands alone, centred, slightly larger and bold.]
+[NOTE: The last line is the largest type on the page after the H1, Pure Gold. The dove/P mark `assets/img/mark-linen.png` sits large and faint in the bottom-right corner (decorative, `alt=""`).]
 
-### Contact
+## 10 · Contact — Linen
+
+KICKER: Contact
 
 Prothesis LLC is based in the greater Chicago area, Illinois.
+
 Write to us: contact@prothesis.net
 
-[NOTE: Two lines, separated by `<br>`. The email address is a `mailto:` link.]
+[NOTE: The email address is a `mailto:` link.]
 
 ## Footer
 
@@ -115,7 +183,7 @@ Prothesis LLC – Greater Chicago area, Illinois – contact@prothesis.net – �
 
 # Privacy page (`privacy.html`, reached at `/privacy`)
 
-[NOTE: Browser tab title: `Privacy – Prothesis LLC`. Same header band (logo linked to `/`, tagline, golden arc) and the same footer as the home page. "Privacy" below is this page's H1.]
+[NOTE: Browser tab title: `Privacy – Prothesis LLC`. The short Navy band (logo linked to `/`, tagline, golden arc) and the same footer as the home page. "Privacy" below is this page's H1. This page's wording was approved 2026-10-19 and is unchanged.]
 
 # Privacy
 
@@ -137,7 +205,7 @@ Prothesis LLC – Greater Chicago area, Illinois – contact@prothesis.net – �
 
 # Not-found page (`404.html`)
 
-[NOTE: Browser tab title: `Page not found – Prothesis LLC`. Same header band and footer.]
+[NOTE: Browser tab title: `Page not found – Prothesis LLC`. The short Navy band and the footer.]
 
 # This page doesn’t exist.
 
