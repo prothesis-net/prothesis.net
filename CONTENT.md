@@ -16,7 +16,7 @@ Build the pages from this text exactly. Do not rewrite, shorten, reorder or "imp
 
 [NOTE: The Navy opening band with the golden arc — see BUILD.md "The opening band". Logo: `assets/img/logo-primary-light.png`, alt text "Prothesis", linked to `/`.]
 
-*Translation ignites purpose.*
+*Translation ignites purpose*
 
 [NOTE: The line above is the tagline, directly beneath the logo.]
 
