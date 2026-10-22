@@ -1,4 +1,4 @@
-/* prothesis.net — shared by index.html, privacy.html and 404.html */
+/* prothesis.net — shared by index.html, about.html, privacy.html and 404.html (v6, 2026-10-22) */
 
 @font-face { font-family: "Prothesis Basic"; src: url(/assets/fonts/prothesis-basic-regular.woff2) format("woff2"); font-weight: 400; font-style: normal; font-display: block; }
 @font-face { font-family: "Prothesis Basic"; src: url(/assets/fonts/prothesis-basic-italic.woff2) format("woff2"); font-weight: 400; font-style: italic; font-display: block; }
@@ -20,40 +20,37 @@ body {
   font-size: clamp(18px, 1.4vw, 22px);
   line-height: 1.55;
 }
-h1, h2, p, blockquote, ol { margin: 0; }
-h1, h2 { font-weight: 700; }
+h1, h2, h3, p, blockquote, ol { margin: 0; }
+h1, h2, h3 { font-weight: 700; }
 img { max-width: 100%; }
 
 a { color: inherit; text-decoration: underline; text-underline-offset: 4px; }
-a:focus-visible { outline: 3px solid var(--navy); outline-offset: 4px; }
-.ch-open a:focus-visible, .ch-question a:focus-visible, .ch-calling a:focus-visible,
-.ch-word a:focus-visible, .ch-app a:focus-visible, .ch-mission a:focus-visible,
-.ch-close a:focus-visible, .band a:focus-visible { outline-color: var(--linen); }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--navy); outline-offset: 4px; }
+.home main a:focus-visible, .home main button:focus-visible, .band a:focus-visible { outline-color: var(--linen); }
 
-/* Prothesis Scripture: the tagline, translatio, the verse words, the Scripture phrases */
-.tagline, .translatio, .scr {
+.vh { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* Prothesis Scripture: the tagline and the Scripture words */
+.tagline, .scr {
   font-family: "Prothesis Scripture";
   font-style: italic;
   font-weight: 400;
   font-synthesis: none;
 }
 
-/* Greek and its transliteration: the Prothesis fonts have no Greek letters and no ē */
+/* Greek: the Prothesis fonts have no Greek letters */
 .greek { font-family: "Times New Roman", Georgia, serif; font-style: normal; font-weight: 400; }
-.translit { font-family: "Times New Roman", Georgia, serif; font-style: italic; font-weight: 400; }
 
 /* ---------- Type scale ---------- */
 
-.d1 { font-weight: 700; font-size: clamp(44px, 7.2vw, 104px); line-height: .98; letter-spacing: -.02em; }
 .d2 { font-weight: 700; font-size: clamp(34px, 5vw, 72px); line-height: 1.04; }
 .d3 { font-weight: 700; font-size: clamp(26px, 3.2vw, 44px); line-height: 1.15; }
 .lead { font-size: clamp(20px, 2vw, 28px); line-height: 1.45; margin: 28px auto 0; max-width: 34em; text-wrap: pretty; }
 .q { font-style: italic; font-size: clamp(24px, 3vw, 42px); line-height: 1.3; }
-.k { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .18em; line-height: 1.4; margin-bottom: 28px; }
-.attr { font-size: 16px; letter-spacing: .04em; font-style: normal; line-height: 1.5; margin-top: 26px; }
-h1, .d1, .d2, .d3, .q { text-wrap: balance; }
+.sec { color: var(--gold); font-size: clamp(22px, 2.3vw, 32px); line-height: 1.2; margin-bottom: 36px; }
+h1, .d2, .d3, .q, .sec { text-wrap: balance; }
 
-/* ---------- Chapters ---------- */
+/* ---------- Chapters (home) ---------- */
 
 .ch {
   min-height: 100vh;
@@ -62,44 +59,46 @@ h1, .d1, .d2, .d3, .q { text-wrap: balance; }
   align-items: center;
   justify-content: center;
   padding: 14vh 24px;
-  overflow: hidden;
   position: relative;
   text-align: center;
 }
 .inner { width: 100%; max-width: 1040px; margin: 0 auto; position: relative; z-index: 1; }
-.ch-app .inner, .ch-founder .inner { max-width: 760px; }
+.home main { color: var(--linen); }
 
-.ch-open, .ch-close { background: #101B23; }
-.ch-name, .ch-contact { background: #F3F3ED; }
-.ch-founder { background: #BFAC94; }
+/* Ground 1: the Key of David's colours only (a derived field, no painting), under the opening, "What presses
+   hardest" and "Could there be hope". One continuous field across the three. */
+.ground-key { position: relative; overflow: hidden; background: #101B23; isolation: isolate; }
+.ground-key::before { content: ""; position: absolute; inset: -80px; z-index: -1; filter: blur(24px); background:
+  radial-gradient(40% 22% at 32% 14%, #6A93AC 0%, rgba(106,147,172,0) 72%),
+  radial-gradient(48% 26% at 72% 40%, #24485E 0%, rgba(36,72,94,0) 72%),
+  radial-gradient(42% 24% at 22% 62%, #2E5970 0%, rgba(46,89,112,0) 70%),
+  radial-gradient(45% 22% at 70% 86%, #24485E 0%, rgba(36,72,94,0) 72%),
+  radial-gradient(55% 28% at 85% 8%, #0D2331 0%, rgba(13,35,49,0) 75%); }
+.ground-key::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(16,27,35,.45), rgba(16,27,35,.62) 40%, rgba(16,27,35,.8)); }
 
-/* Text colours (BUILD.md, Colours) */
-.ch-open, .ch-question, .ch-calling, .ch-word, .ch-app, .ch-mission, .ch-close { color: var(--linen); }
-.ch-name, .ch-founder, .ch-contact { color: var(--navy); }
-.ch-question .q { color: var(--gold); }
-.ch-app .k { color: var(--gold); }
-.ch-name .k, .ch-contact .k { color: var(--goat-d); }
-.ch-founder .attr { color: var(--earth); }
+/* Ground 2: the river painting (Ezekiel 47) under "Where rest comes in" and "Morning shift". */
+.ground-river { position: relative; background: #3A5267 url(/assets/img/bg-word-desktop.jpg) center / cover no-repeat; }
+@media (max-aspect-ratio: 4/5) { .ground-river { background-image: url(/assets/img/bg-word-mobile.jpg); } }
 
-/* Spacing between blocks */
-.d3 { margin-top: 48px; }
-.ch-question .lead { margin-top: 32px; }
-.ch-question .q { margin-top: 48px; }
+/* Ground 3: "Our first app" on Slate Blue, the cards Navy on it. Ground 4: the drawn lines and the ask, Navy. */
+.ch-app { background: var(--slate); padding: 14vh 0 12vh; text-align: center; overflow-x: clip; }
+.ch-drawn { background: var(--navy); min-height: auto; padding: 16vh 24px; }
 
-/* ---------- 1 Opening ---------- */
+.ch-presses .q { color: var(--gold); margin-top: 48px; }
+.ch-presses .d2 + .lead { margin-top: 32px; }
+.ch-presses .q + .lead { margin-top: 48px; }
+
+/* ---------- Opening ---------- */
 
 .ch-open { padding-bottom: 26vh; }
-.ch-open .inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: calc(100vh - 14vh - 26vh);
-  min-height: calc(100svh - 14vh - 26vh);
-}
+.ch-open .inner { display: flex; flex-direction: column; align-items: center; }
 .logo-link { display: block; }
-.logo { display: block; width: clamp(260px, 34vw, 480px); height: auto; }
+.logo { display: block; width: 200px; height: auto; }
 .tagline { color: var(--gold); font-size: 18px; line-height: 1.3; margin-top: 12px; }
-.ch-open h1 { margin: auto 0; }
+.ch-open .logo { width: clamp(260px, 34vw, 480px); }  /* main d7f22aa: "make the opening logo much bigger" */
+.ch-open .tagline { font-size: clamp(18px, 1.8vw, 24px); }
+.top-link { position: absolute; top: 18px; right: 24px; z-index: 2; display: inline-block; padding: 12px 4px; font-size: 14px; letter-spacing: .12em; text-decoration: none; color: var(--linen); }
+.top-link:hover { text-decoration: underline; }
 
 /* The golden arc */
 .firmament { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 30vh; min-height: 170px; z-index: 0; pointer-events: none; }
@@ -107,68 +106,116 @@ h1, .d1, .d2, .d3, .q { text-wrap: balance; }
 @keyframes glint { from { transform: rotate(-24deg); } to { transform: rotate(24deg); } }
 @media (prefers-reduced-motion: reduce) { .glint { animation: none; transform: rotate(-6deg); } }
 
-/* ---------- Backgrounds ---------- */
+/* ---------- Verses ---------- */
 
-.ch-word    { background: #3A5267 url(/assets/img/bg-word-desktop.jpg) center / cover no-repeat; }
-.ch-app     { background: #101B23 url(/assets/img/bg-app-desktop.jpg) center / cover no-repeat; }
-.ch-mission { background: #443A31 url(/assets/img/bg-mission-desktop.jpg) center / cover no-repeat; }
-@media (max-aspect-ratio: 4/5) {
-  .ch-word    { background-image: url(/assets/img/bg-word-mobile.jpg); }
-  .ch-app     { background-image: url(/assets/img/bg-app-mobile.jpg); }
-  .ch-mission { background-image: url(/assets/img/bg-mission-mobile.jpg); }
-}
-
-.credit { position: absolute; left: 0; right: 0; bottom: 18px; z-index: 1; text-align: center; font-size: 13px; letter-spacing: .04em; color: var(--linen); }
-.ch-app .credit { color: var(--sea); }
-
-/* Temporary abstract colour fields (chapters 2 and 3) */
-.ch-question, .ch-calling { position: relative; overflow: hidden; }
-.ch-question { background: #101B23; }
-.ch-calling  { background: #4B2540; }
-.ch-question::before, .ch-calling::before { content: ""; position: absolute; inset: -80px; z-index: 0; filter: blur(24px); }
-.ch-question::before { background:
-  radial-gradient(62% 58% at 32% 30%, #6A93AC 0%, rgba(106,147,172,0) 72%),
-  radial-gradient(70% 65% at 72% 62%, #24485E 0%, rgba(36,72,94,0) 72%),
-  radial-gradient(55% 60% at 18% 78%, #19384A 0%, rgba(25,56,74,0) 70%),
-  radial-gradient(80% 70% at 85% 15%, #0D2331 0%, rgba(13,35,49,0) 75%); }
-.ch-calling::before { background:
-  radial-gradient(55% 50% at 28% 32%, #A596CF 0%, rgba(165,150,207,0) 70%),
-  radial-gradient(60% 55% at 74% 40%, #EBDBC9 0%, rgba(235,219,201,0) 68%),
-  radial-gradient(65% 60% at 58% 82%, #8777C0 0%, rgba(135,119,192,0) 72%),
-  radial-gradient(50% 55% at 12% 85%, #C4A9BC 0%, rgba(196,169,188,0) 70%),
-  radial-gradient(45% 40% at 90% 10%, #DCC7C1 0%, rgba(220,199,193,0) 70%); }
-.ch-question::after, .ch-calling::after { content: ""; position: absolute; inset: 0; z-index: 0; }
-.ch-question::after { background: linear-gradient(180deg, rgba(16,27,35,.55), rgba(16,27,35,.8)); }
-.ch-calling::after  { background: rgba(75,37,64,.72); }
-
-/* ---------- 3 Calling ---------- */
-
-.calls { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 64px; }
-.call { border-top: 2px solid var(--gold); padding: 24px; }
-.call-head { font-weight: 700; font-size: clamp(22px, 2.2vw, 30px); line-height: 1.2; }
-.call-text { margin-top: 12px; }
-.calls + .d3 { margin-top: 64px; }
-@media (max-width: 720px) {
-  .calls { grid-template-columns: 1fr; gap: 32px; }
-}
-
-/* ---------- 4 His Word ---------- */
-
-.word-latin { margin-top: 48px; }
-.translatio { display: block; font-size: clamp(26px, 3vw, 42px); line-height: 1.2; }
-.latin { display: block; margin-top: 8px; }
-.verse { margin-top: 40px; }
+.verse { margin-top: 44px; }
 .verse::before { content: ""; display: block; width: 64px; height: 2px; background: var(--gold); margin: 0 auto 24px; }
 .verse-words { font-size: clamp(20px, 2.2vw, 30px); line-height: 1.4; max-width: 32em; margin: 0 auto; }
-.ref { font-size: 15px; line-height: 1.5; margin-top: 16px; color: var(--linen); }
+.ref { font-size: 15px; line-height: 1.5; margin-top: 16px; letter-spacing: .04em; }
 .verse + .lead { margin-top: 48px; }
-.ch-word .d3 { margin: 64px 0; }
-.ch-word .lead + .lead { margin-top: 48px; }
+.gloss { font-family: "Prothesis Basic"; font-style: italic; font-size: .78em; }
+.ch-rest .lead + .lead { margin-top: 32px; }
 
-/* The logo inline (chapters 4 and 7) */
-.logo-inline { display: block; height: .9em; width: auto; margin: 0 auto 10px; }
+/* ---------- Our first app: the cards on the arc ---------- */
 
-/* ---------- 5 Our first app ---------- */
+.app-intro, .app-after { padding: 0 24px; }
+.app-after { margin-top: 8px; }
+.app-after .lead + .lead { margin-top: 32px; }
+
+.cards-wrap { --stick: 16px; position: relative; max-width: 1180px; margin: 64px auto 56px; padding: 0 24px; text-align: left; }
+.cards-row { position: relative; }
+.arc-line { position: absolute; left: 0; top: 0; z-index: 1; overflow: visible; pointer-events: none; display: none; }
+.js .arc-line { display: block; }
+.arc-path { fill: none; stroke: var(--gold); stroke-width: 2.5; }
+.glint2-b, .glint2-c { fill: none; stroke-linecap: round; }
+.glint2-b { stroke-width: 6; }
+.glint2-c { stroke-width: 2; }
+.glint2 { transition: transform 1.4s cubic-bezier(.45,0,.25,1), opacity .6s ease; }
+.glint2.idle { animation: drift 15s linear -7.5s infinite; }
+@keyframes drift { 0% { transform: rotate(var(--gl)); opacity: 0; } 7% { opacity: 1; } 93% { opacity: 1; } 100% { transform: rotate(var(--gr)); opacity: 0; } }
+.glint2.open .glint2-seg { animation: breathe 3.6s ease-in-out 1.4s infinite alternate; }
+@keyframes breathe { from { transform: translateX(-3px); opacity: 1; } to { transform: translateX(3px); opacity: .72; } }
+
+.cards { position: relative; display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; }
+.card {
+  position: relative; flex: 1 1 0; min-width: 0; height: 500px; overflow: clip;
+  padding: 26px 22px 0; border-radius: 28px; background: var(--navy); color: var(--linen);
+  container-type: inline-size; cursor: pointer;
+}
+.card-kicker { margin: 0 0 10px; font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--sea); }
+.card-head { font-size: clamp(17px, 9.4cqw, 24px); line-height: 1.22; color: var(--linen); }
+.card-phone {
+  --pw: min(232px, calc(100cqw + 4px));
+  position: absolute; left: 0; right: 0; margin: 0 auto; width: var(--pw);
+  top: calc(494px - .58 * (var(--pw) - 12px) * 844 / 390);
+  padding: 6px; border-radius: 32px; background: #000;
+  transition: transform .4s ease;
+}
+.card-phone img { display: block; width: 100%; height: auto; border-radius: 26px; }
+.card:hover .card-phone { transform: translateY(-6px); }
+.card-btn {
+  position: absolute; z-index: 3; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; background: var(--linen); cursor: pointer;
+}
+.card-btn svg { width: 20px; height: 20px; fill: none; stroke: var(--navy); stroke-width: 2.4; stroke-linecap: round; }
+.card-plus { right: 18px; bottom: 18px; }
+.card .flow { display: none; }
+
+/* Without JavaScript: every card shows its screens in order, under its headline. */
+html:not(.js) .cards { flex-wrap: wrap; }
+html:not(.js) .card { height: auto; padding-bottom: 24px; cursor: default; flex: 1 1 240px; }
+html:not(.js) .card-phone, html:not(.js) .card-plus { display: none; }
+html:not(.js) .card .flow { display: flex; flex-direction: column; gap: 14px; margin-top: 20px; }
+html:not(.js) .card .flow img { display: block; width: 100%; height: auto; border: 6px solid #000; border-radius: 26px; }
+
+/* A desktop STAGE: the row pinned, the open card's panel over it. --p (0 → 1) is set by cards.js from the scroll. */
+/* No clip on the row: the parting cards travel off the screen; the section (.ch-app, overflow-x: clip) keeps the page from scrolling sideways. */
+.cards-wrap.is-stage .cards-pin { position: sticky; top: var(--stick); height: var(--pinh); }
+.cards-wrap.is-stage .cards-row { height: 100%; }
+.cards-row { --pm: 0; --pf: 0; --pp: 0; --pb: 0; }
+.cards-wrap.is-stage .card { transform: translate3d(calc(var(--dx, 0px) * var(--pm)), 0, 0); will-change: transform; }
+.cards-wrap.is-stage .card.is-open-face { opacity: calc(1 - var(--pf)); }
+.panel { position: absolute; left: 0; right: 0; top: var(--ptop, 60px); bottom: 0; border-radius: 28px; background: var(--navy); opacity: 0; pointer-events: none; }
+.cards-wrap.is-stage .panel { opacity: var(--pp); transform: scale(calc(.96 + .04 * var(--pp))); will-change: opacity, transform; }
+.obody { position: absolute; left: 0; right: 0; top: var(--ptop, 60px); bottom: 0; z-index: 2; padding: 26px 24px 0; text-align: center; pointer-events: none;
+  opacity: var(--pb); transform: translate3d(0, calc((1 - var(--pb)) * 20px), 0); will-change: opacity, transform; }
+.obody.live { pointer-events: auto; }
+.obody .card-kicker, .obody .card-head { padding: 0 64px; }
+.obody .card-head { font-size: clamp(22px, 2vw, 28px); }
+.card-x { top: 18px; right: 18px; }
+.ophone { height: var(--phh, 560px); width: calc(var(--phh, 560px) * 390 / 844); margin: 18px auto 0; padding: 7px; box-sizing: content-box; border-radius: 40px; background: #000; }
+.oscreen { position: relative; width: 100%; height: 100%; border-radius: 33px; overflow: hidden; background: var(--linen); isolation: isolate; }
+.oscreen img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; will-change: opacity, transform; }
+
+/* A card opened IN PLACE (under 1024 px): its words and phone pinned inside it while its screens change. */
+.card.is-open { height: var(--cardh); cursor: default; padding: 14px 16px 20px; }
+.card.is-open > .card-kicker, .card.is-open > .card-head, .card.is-open > .card-phone, .card.is-open > .card-plus { display: none; }
+.cpin { position: sticky; top: var(--stick); text-align: center; padding-top: 10px; animation: cpin-in .6s cubic-bezier(.4,0,.2,1) both; }
+@keyframes cpin-in { from { opacity: 0; } to { opacity: 1; } }  /* opacity only: the page is already gliding, one motion is enough */
+.cpin .card-x { top: 0; right: 0; }
+.cpin .card-kicker, .cpin .card-head { padding: 0 48px; }
+.cpin .ophone { --phh: min(68vh, 560px); margin-top: 16px; }
+
+/* Reduce Motion: the open card's screens as a plain list under the row. */
+.rm-panel { position: relative; margin-top: 24px; padding: 26px 24px 28px; border-radius: 28px; background: var(--navy); color: var(--linen); text-align: center; }
+.rm-panel .card-x { top: 18px; right: 18px; }
+.rm-panel .card-kicker, .rm-panel .card-head { padding: 0 56px; }
+.rm-list { display: flex; flex-direction: column; align-items: center; gap: 18px; margin-top: 20px; }
+.rm-list img { display: block; width: min(100%, 300px); height: auto; border: 6px solid #000; border-radius: 30px; }
+
+@media (max-width: 1023px) {
+  .js .arc-line { display: none; }
+  .cards { flex-direction: column; align-items: center; gap: 20px; }
+  .card, .card.is-open { flex: none; width: min(100%, 420px); text-align: center; margin-top: 0 !important; }
+  .card-head { font-size: clamp(20px, 6vw, 26px); }
+  .card-phone { --pw: min(232px, calc(100cqw - 40px)); }
+}
+
+/* ---------- The drawn lines and the ask ---------- */
+
+.drawn { color: var(--slate); font-weight: 700; font-size: clamp(26px, 3vw, 40px); line-height: 1.25; text-wrap: balance; }
+.drawn + .drawn { margin-top: 14px; }
+.ask { margin-top: 64px; }
 
 .btn {
   display: inline-block;
@@ -182,69 +229,77 @@ h1, .d1, .d2, .d3, .q { text-wrap: balance; }
   line-height: 1.2;
   text-decoration: none;
   border-radius: 0;
-  box-shadow: none;
 }
 .fine { font-size: 16px; font-style: italic; color: var(--sea); }
 
-/* ---------- 6 The name ---------- */
+/* ---------- Footer ---------- */
 
-.greek-big { font-size: clamp(72px, 14vw, 220px); line-height: 1; margin-bottom: 20px; }
-.greek-big + .d3 { margin-top: 0; }
-.ch-name .scr { color: var(--purple); }
-.nw { white-space: nowrap; }
-.ch-name .lead { margin-top: 40px; }
-
-/* ---------- 7 Mission ---------- */
-
-.ladder { list-style: none; padding: 0; max-width: 34em; margin: 56px auto 0; }
-.ladder li { font-size: clamp(22px, 2.6vw, 36px); line-height: 1.3; padding: 26px 0; border-top: 1px solid rgba(243,243,237,.25); }
-.ladder li:last-child { border-bottom: 1px solid rgba(243,243,237,.25); }
-.ladder .n { color: var(--gold); font-weight: 700; margin-right: 18px; }
-
-/* ---------- 9 Close ---------- */
-
-.ch-close .lead { max-width: 40em; margin: 0 auto 40px; }
-.close-line { color: var(--gold); font-size: clamp(40px, 6.4vw, 92px); }
-.mark { position: absolute; right: -6vw; bottom: -6vh; width: min(70vw, 620px); height: auto; max-width: none; opacity: .07; z-index: 0; }
-
-/* ---------- 10 Contact + footer ---------- */
-
-.ch-contact { min-height: auto; padding: 18vh 24px 10vh; }
-.d3.contact { margin-top: 32px; }
-.contact a { color: var(--navy); text-decoration-color: var(--goat); text-underline-offset: 4px; }
-
-footer { background: var(--linen); color: var(--slate); text-align: center; font-size: 15px; line-height: 1.6; padding: 0 24px 56px; }
+footer { background: var(--linen); color: var(--slate); text-align: center; font-size: 15px; line-height: 1.6; padding: 40px 24px 28px; }
 footer a { color: inherit; }
+.art-credit { position: absolute; right: 24px; bottom: 16px; z-index: 1; margin: 0; font-size: 11px; letter-spacing: .06em; color: var(--linen); opacity: .55; }
 
-/* ---------- Privacy and 404 pages ---------- */
+/* ---------- About, privacy and 404: the Navy band on top, a reading column ---------- */
 
 .band { position: relative; overflow: hidden; background: var(--navy); text-align: center; padding: 72px 24px 150px; }
 .band .inner { display: flex; flex-direction: column; align-items: center; }
 .band .logo { width: 260px; }
 .band .firmament { height: 220px; }
+.band .top-link { color: var(--linen); }
 
 .page { max-width: 680px; margin: 64px auto 0; padding: 0 24px 80px; font-size: 18px; line-height: 1.6; text-align: left; }
 .page h1 { font-size: 40px; line-height: 1.15; margin-bottom: 24px; }
 .page p + p { margin-top: 1em; }
 
+.about { background: var(--linen) url(/assets/img/linen-grain.jpg) left top / 2400px auto repeat; }
+.about footer { background: transparent; }
+.about .page { font-size: 19px; }
+.about .page h2 { font-size: 26px; line-height: 1.2; margin: 64px 0 20px; }
+.about .page h1 + h2 { margin-top: 32px; }
+.about .center { text-align: center; }
+.about .emph { font-weight: 700; font-size: clamp(24px, 3vw, 30px); line-height: 1.25; margin: 36px 0; text-wrap: balance; }
+.about .verse { margin: 36px 0; }
+.about .verse-words { font-size: 22px; }
+.about .ref { color: var(--earth); }
+.about .greek-big { font-size: clamp(56px, 12vw, 96px); line-height: 1.1; margin: 8px 0 12px; }
+.about .name-refs { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin: 24px 0; text-align: center; }
+.about .name-refs p { margin: 0; }
+.about .name-refs .scr { font-size: 20px; color: var(--purple); }
+.about .name-refs .nref { display: block; font-size: 15px; margin-top: 6px; color: var(--earth); letter-spacing: .04em; }
+.about .founder { display: grid; grid-template-columns: 180px 1fr; gap: 32px; align-items: start; }
+.about .founder img { width: 180px; height: 180px; object-fit: cover; object-position: 50% 40%; border-radius: 50%; display: block; }
+.about .founder blockquote p { font-style: italic; }
+.about .founder blockquote p + p { margin-top: 1em; }
+.about .founder .attr { font-style: normal; font-size: 16px; letter-spacing: .04em; margin-top: 18px; color: var(--earth); }
+@media (max-width: 640px) {
+  .about .name-refs { grid-template-columns: 1fr; gap: 20px; }
+  .about .founder { grid-template-columns: 1fr; gap: 20px; }
+  .about .founder img { width: 160px; height: 160px; }
+}
+
 /* ---------- Motion ---------- */
 
 .js .r { opacity: 0; transform: translateY(28px); transition: opacity .9s cubic-bezier(.2,.6,.2,1), transform .9s cubic-bezier(.2,.6,.2,1); }
 .js .r.on { opacity: 1; transform: none; }
-.js .s1{transition-delay:.15s}.js .s2{transition-delay:.3s}.js .s3{transition-delay:.45s}.js .s4{transition-delay:.6s}.js .s5{transition-delay:.75s}
-@media (prefers-reduced-motion: reduce) { .js .r { opacity: 1; transform: none; transition: none; } }
+.js .s1{transition-delay:.15s}.js .s2{transition-delay:.3s}.js .s3{transition-delay:.45s}.js .s4{transition-delay:.6s}
+@media (prefers-reduced-motion: reduce) {
+  .js .r { opacity: 1; transform: none; transition: none; }
+  .glint2, .card-phone { transition: none; }
+  .cpin { animation: none; }
+  .glint2.idle, .glint2.open .glint2-seg { animation: none; }
+  .card:hover .card-phone { transform: none; }
+}
 
 /* ---------- Phones ---------- */
 
 @media (max-width: 600px) {
   .ch { padding: 12vh 20px; }
   .ch-open { padding-bottom: 26vh; }
-  .ch-open .inner { min-height: calc(100vh - 12vh - 26vh); min-height: calc(100svh - 12vh - 26vh); }
-  .ch-contact { padding: 18vh 20px 10vh; }
+  .ch-drawn { padding: 12vh 20px; }
+  .cards-wrap { padding: 0 16px; margin-top: 48px; }
   .btn { padding: 18px 30px; }
-  .colon { display: none; }
-  .rest { display: block; }
-  .fine a, footer a, .contact a { display: inline-block; padding: 10px 4px; margin: -10px -4px; }
+  .top-link { right: 16px; top: 10px; }
+  .fine a, footer a { display: inline-block; padding: 10px 4px; margin: -10px -4px; }
+  .art-credit { right: 16px; bottom: 12px; }
 
   .band { padding: 48px 20px 130px; }
   .band .logo { width: 200px; }
