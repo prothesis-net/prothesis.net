@@ -82,7 +82,7 @@ h1, .d2, .d3, .q, .sec { text-wrap: balance; }
 
 /* Ground 3: "Our first app" on Slate Blue, the cards Navy on it. Ground 4: the drawn lines and the ask, Navy. */
 .ch-app { background: var(--slate); padding: 14vh 0 12vh; text-align: center; overflow-x: clip; }
-.ch-drawn { background: var(--navy); min-height: auto; padding: 16vh 24px; }
+.ch-drawn { background: var(--navy); min-height: 100vh; min-height: 100svh; padding: 16vh 24px; }   /* a whole screen, like every chapter (scroll-settle.js) */
 
 .ch-presses .q { color: var(--gold); margin-top: 48px; }
 .ch-presses .d2 + .lead { margin-top: 32px; }

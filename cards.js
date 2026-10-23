@@ -31,7 +31,7 @@
   var mqRM = window.matchMedia('(prefers-reduced-motion: reduce)');
   var mqWide = window.matchMedia('(min-width: 1024px)');
   var open = null;      // { card, mode: 'stage' | 'inplace' | 'rm', shots: [img], n, L, pin }
-  var frame = 0, anim = null, closing = false, changed = 0;   // changed: when a card last closed (scroll-settle.js)
+  var frame = 0, anim = null, closing = false, changed = -1e9;   // changed: when a card last closed (scroll-settle.js)
   var held = null;      // while "+" plays the part on a clock: { p } (the scroll read leaves the part alone)
 
   function clamp(x, a, b) { return x < a ? a : x > b ? b : x; }
@@ -359,25 +359,28 @@
   }
 
   /* ---------- for scroll-settle.js ---------- */
-  // Where the page rests while a flow is open: the row pinned before the part, each screen whole (a fifth of a stretch
-  // after it has fully come in, clear of the next change), the cards back in
-  // after the return (stage); each screen whole and the last one held (in place). [] when nothing is open; null while
-  // a card is moving the page itself, or has just closed, so nothing else moves it then.
-  window.prothesisCardRests = function () {
+  // The lanes while a flow is open. rests: where the page stops (stage: the row pinned, then each screen whole, then
+  // the cards back in; in place: each screen whole). wins[i]: the stretch between rests[i] and rests[i + 1] where the
+  // picture actually changes (a screen comes in over the first part of its stretch, idx +0.03 to +0.4; see showAt).
+  // after: where the page itself starts moving again past the last rest. Nothing open: no rests. null while a card is
+  // moving the page itself, or has just closed, so nothing else moves it then.
+  window.prothesisCardLanes = function () {
     if (anim || held || closing || performance.now() - changed < 700) return null;
-    if (!open || open.mode === 'rm') return [];
-    var V = vh(), out = [], k;
+    if (!open || open.mode === 'rm') return { rests: [], wins: [], after: 0 };
+    var V = vh(), rests = [], wins = [], k, y;
     if (open.mode === 'stage') {
-      var s0 = docTop(stage) - STICK;
-      out.push(s0);
-      for (k = 0; k < open.n; k++) out.push(s0 + V * (D.part + D.pre + (k ? k - 0.2 : 0) * D.seg));
-      out.push(s0 + V * (D.part + D.pre + (open.n - 1) * D.seg + D.post + D.back));
-    } else {
-      var c0 = docTop(open.card) - open.settleTop;
-      for (k = 0; k < open.n; k++) out.push(c0 + V * (M.pre + (k ? k - 0.2 : 0) * M.seg));
-      out.push(c0 + open.L);
+      var s0 = docTop(stage) - STICK, P = D.part + D.pre, a0 = P + (open.n - 1) * D.seg + D.post;
+      y = function (a) { return Math.round(s0 + a * V); };
+      rests.push(y(0), y(P)); wins.push([y(0), y(P)]);
+      for (k = 1; k < open.n; k++) { rests.push(y(P + k * D.seg)); wins.push([y(P + (k - 0.97) * D.seg), y(P + (k - 0.6) * D.seg)]); }
+      rests.push(y(a0 + D.back)); wins.push([y(a0), y(a0 + D.back)]);
+      return { rests: rests, wins: wins, after: Math.round(s0 + open.L) };
     }
-    return out.map(Math.round);
+    var c0 = docTop(open.card) - open.settleTop;
+    y = function (a) { return Math.round(c0 + a * V); };
+    rests.push(y(M.pre));
+    for (k = 1; k < open.n; k++) { rests.push(y(M.pre + k * M.seg)); wins.push([y(M.pre + (k - 0.97) * M.seg), y(M.pre + (k - 0.6) * M.seg)]); }
+    return { rests: rests, wins: wins, after: Math.round(c0 + open.L + 40) };
   };
 
   /* ---------- wiring ---------- */
