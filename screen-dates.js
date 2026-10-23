@@ -3,8 +3,8 @@
    the browser: the old date is smoothed away by blending the background from either side, row by row, and today's
    date is set in its place in the app's own face (Prothesis Basic), size, colour and light edge. The image files are
    never changed; without JavaScript, or if anything fails, the original screenshots show as they are.
-   Work is done only when it is needed: the cards' first screens as the section comes near, the rest of a flow when
-   its card is pointed at or opened. If the day turns while the page is open, the dates follow on return. */
+   Work is done only when it is needed (the cards' first screens as the section comes near, the rest of a flow when
+   its card is pointed at or opened) and only while the page is still. If the day turns while the page is open, the dates follow on return. */
 (function () {
   var wrap = document.querySelector('[data-cards]');
   if (!wrap || !window.Promise || !window.URL || !document.createElement('canvas').getContext) return;
@@ -88,19 +88,41 @@
     ctx.restore();
   }
 
+  // The drawing waits until the page has been still for a moment, one screenshot at a time, so it never lands in the
+  // middle of a swipe or a glide. Saved as WebP where the browser can write it (not Safari), else as JPEG, which is
+  // quick to write; PNG would stall a phone for a moment per screenshot.
+  var lastMove = 0, queue = Promise.resolve();
+  ['scroll', 'touchmove', 'wheel'].forEach(function (ev) { window.addEventListener(ev, function () { lastMove = performance.now(); }, { passive: true }); });
+  function calm() {
+    return new Promise(function (ok) {
+      (function wait() { var q = performance.now() - lastMove; if (q >= 350) ok(); else setTimeout(wait, 370 - q); })();
+    });
+  }
+  var TYPE = (function () {
+    try { var c = document.createElement('canvas'); c.width = c.height = 1; return c.toDataURL('image/webp').indexOf('data:image/webp') === 0 ? 'image/webp' : 'image/jpeg'; }
+    catch (e) { return 'image/jpeg'; }
+  })();
+
   function render(name, day) {
     var s = SPOT[SHOTS[name]];
-    return Promise.all([loadImage(DIR + name + '.webp'), fontsReady()]).then(function (r) {
-      var im = r[0], c = document.createElement('canvas');
-      c.width = im.naturalWidth; c.height = im.naturalHeight;
-      var ctx = c.getContext('2d', { willReadFrequently: true });
-      ctx.drawImage(im, 0, 0);
-      clear(ctx, s);
-      write(ctx, s, SAY[s.say](day));
-      return new Promise(function (ok, fail) {
-        c.toBlob(function (b) { if (b) ok(URL.createObjectURL(b)); else fail(new Error('no blob')); }, 'image/webp', 0.92);
+    var ready = Promise.all([loadImage(DIR + name + '.webp'), fontsReady()]).then(function (r) {
+      return r[0].decode ? r[0].decode().then(function () { return r[0]; }, function () { return r[0]; }) : r[0];
+    });
+    var job = queue.then(function () { return ready; }).then(function (im) {
+      return calm().then(function () {
+        var c = document.createElement('canvas');
+        c.width = im.naturalWidth; c.height = im.naturalHeight;
+        var ctx = c.getContext('2d', { willReadFrequently: true });
+        ctx.drawImage(im, 0, 0);
+        clear(ctx, s);
+        write(ctx, s, SAY[s.say](day));
+        return new Promise(function (ok, fail) {
+          c.toBlob(function (b) { if (b) ok(URL.createObjectURL(b)); else fail(new Error('no blob')); }, TYPE, 0.92);
+        });
       });
     });
+    queue = job.catch(function () {});
+    return job;
   }
 
   // Every <img> showing this screenshot, now or later (cards.js copies the src of the hidden lists when a card opens).

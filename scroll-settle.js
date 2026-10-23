@@ -1,13 +1,14 @@
 /* scroll-settle.js — the home page moves chapter by chapter, kept in its lanes.
    Each flick of the wheel or trackpad, each swipe, each scrolling key is read as an intent, and the page glides on its
-   own (a smooth ease, about two thirds of a second for a whole screen) to the next place it rests in that direction.
+   own (a long, soft ease, a little under a second for a whole screen) to the next place it rests in that direction.
    At rest one chapter fills the screen; the next is never half in view.
      - A chapter rests at its top; one taller than the screen also at its bottom (more steps if it is much taller), so
        nothing is out of reach and no step is longer than a screen.
      - "Our first app": its top, then (on phones) each card in the middle of the screen, then its bottom.
      - With a flow open, each flick is one screen; the glide skips the stretches of scroll where nothing on screen
        changes (the places come from cards.js), so the change is all there is to see.
-   On phones the page follows the finger, then glides on (or back) on release. Off under Reduce Motion, when the page
+   On phones the page follows the finger, then glides on (or back) on release, carrying on at the finger's own speed
+   rather than starting again from still. Off under Reduce Motion, when the page
    is pinch-zoomed, and without JavaScript; the scroll bar still scrolls freely. */
 (function () {
   var chapters = [].slice.call(document.querySelectorAll('.home .ch, .home .ch-app'));
@@ -48,9 +49,13 @@
       for (var i = 0; i < pts.length - 1; i++) fill(pts[i], pts[i + 1], out);
       return;
     }
-    // A chapter whose words all show from its top is one stop: the rest of it is margin.
+    // A chapter whose words fit on one screen is one stop, framed round its words (never past its own ends): two stops
+    // a few dozen pixels apart would make a swipe seem to do nothing.
     var inner = ch.querySelector('.inner');
-    if (inner && inner.getBoundingClientRect().bottom + window.scrollY <= top + V - 8) { out.push(top); return; }
+    if (inner) {
+      var r = inner.getBoundingClientRect(), cTop = r.top + window.scrollY, cH = r.height;
+      if (cH <= V - 24) { out.push(Math.max(top, Math.min(end, cTop - (V - cH) / 2))); return; }
+    }
     fill(top, end, out);
   }
   function byNum(a, b) { return a - b; }
@@ -88,7 +93,7 @@
   }
 
   /* ---------- the glide ---------- */
-  // cubic-bezier(.4, 0, .2, 1): a soft start that answers at once, and a long, gentle landing.
+  // cubic-bezier(.45, 0, .2, 1): a soft start and a long, gentle landing.
   var ease = (function (x1, y1, x2, y2) {
     var cx = 3 * x1, bx = 3 * (x2 - x1) - cx, ax = 1 - cx - bx, cy = 3 * y1, by = 3 * (y2 - y1) - cy, ay = 1 - cy - by;
     function X(t) { return ((ax * t + bx) * t + cx) * t; }
@@ -99,7 +104,7 @@
       for (var i = 0; i < 8; i++) { var e = X(t) - s, d = dX(t); if (Math.abs(e) < 1e-5 || !d) break; t = Math.max(0, Math.min(1, t - e / d)); }
       return Y(t);
     };
-  })(0.4, 0, 0.2, 1);
+  })(0.45, 0, 0.2, 1);
 
   // The way from y to t, less the dead stretches, as pieces in travel order.
   function route(y, t, dead) {
@@ -115,22 +120,27 @@
     });
     return t >= y ? pieces : pieces.reverse().map(function (p) { return [p[1], p[0]]; });
   }
-  function glide(y, t, dead) {
+  // v0: the speed (px per ms, along the way) the page is already moving at, from a released finger. Then the glide
+  // starts at that speed and slows to rest (a cubic Hermite curve), so the hand-off has no jolt.
+  function glide(y, t, dead, v0) {
     stop();
     var pieces = route(y, t, dead), len = 0;
     pieces.forEach(function (p) { len += Math.abs(p[1] - p[0]); });
     if (len < 1) { window.scrollTo(0, t); return; }
-    var ms = Math.max(420, Math.min(880, 380 + len * 0.38)), t0 = performance.now();
+    var ms = Math.max(560, Math.min(1150, 480 + len * 0.6)), t0 = performance.now();
+    var v = Math.max(0, Math.min(v0 || 0, 2.5 * len / ms));   // more would overshoot
+    var curve = v ? function (k) { return len * (-2 * k * k * k + 3 * k * k) + ms * v * (k * k * k - 2 * k * k + k); }
+                  : function (k) { return len * ease(k); };
     anim = { id: 0 };
     var frame = function (now) {
       if (!anim) return;
-      var k = Math.min(1, (now - t0) / ms), u = ease(k) * len, at = t;
+      var k = Math.min(1, (now - t0) / ms), u = curve(k), at = t;
       for (var i = 0; i < pieces.length; i++) {
         var p = pieces[i], l = Math.abs(p[1] - p[0]);
         if (u <= l || i === pieces.length - 1) { at = p[0] + (p[1] > p[0] ? 1 : -1) * Math.min(u, l); break; }
         u -= l;
       }
-      window.scrollTo(0, Math.round(k < 1 ? at : t));
+      window.scrollTo(0, k < 1 ? at : t);   // fractions of a pixel: smoother on fine screens
       if (k < 1) { anim.id = requestAnimationFrame(frame); return; }
       anim = null;
       if (pending) { var d = pending; pending = 0; step(d); }
@@ -140,12 +150,12 @@
   function stop() { if (anim) { cancelAnimationFrame(anim.id); anim = null; } }
 
   // One step in a direction, from where the page is (or from where a swipe began).
-  function step(dir, from) {
+  function step(dir, from, speed) {
     var L = lanes();
     if (L === null) return;   // a card is moving the page itself
     var y = from === undefined ? window.scrollY : from, t = nextStop(stops(L), y, dir);
     if (t === undefined) return;
-    glide(window.scrollY, t, deadZones(L));
+    glide(window.scrollY, t, deadZones(L), speed);
   }
   function goTo(t) { var L = lanes(); if (L !== null) glide(window.scrollY, t, deadZones(L)); }
 
@@ -213,7 +223,7 @@
     tY = null;
     if (Math.abs(moved) < 6) return;   // a tap
     var dir = Math.abs(moved) > 0.1 * vh() || Math.abs(speed) > 0.25 ? (moved > 0 ? 1 : -1) : 0;
-    if (dir) step(dir, tFrom);
+    if (dir) step(dir, tFrom, follow && speed * dir > 0 ? Math.abs(speed) : 0);   // the page is moving only if it was following
     else goTo(tFrom);
   }, { passive: true });
   window.addEventListener('touchcancel', function () { if (tY !== null) { tY = null; goTo(tFrom); } }, { passive: true });
