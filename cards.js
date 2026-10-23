@@ -31,7 +31,7 @@
   var mqRM = window.matchMedia('(prefers-reduced-motion: reduce)');
   var mqWide = window.matchMedia('(min-width: 1024px)');
   var open = null;      // { card, mode: 'stage' | 'inplace' | 'rm', shots: [img], n, L, pin }
-  var frame = 0, anim = null, closing = false;
+  var frame = 0, anim = null, closing = false, changed = 0;   // changed: when a card last closed (scroll-settle.js)
   var held = null;      // while "+" plays the part on a clock: { p } (the scroll read leaves the part alone)
 
   function clamp(x, a, b) { return x < a ? a : x > b ? b : x; }
@@ -320,7 +320,7 @@
   // Takes the open state down at once, keeping the row (or the card) where it stands on screen.
   function teardown(stay) {   // stay: leave the page where it is (the caller places it)
     if (!open) return;
-    var o = open; open = null; held = null;
+    var o = open; open = null; held = null; changed = performance.now();
     if (o.mode === 'stage') {
       var rowTop = row.getBoundingClientRect().top;
       wrap.classList.remove('is-stage');
@@ -357,6 +357,28 @@
     };
     requestAnimationFrame(step);
   }
+
+  /* ---------- for scroll-settle.js ---------- */
+  // Where the page rests while a flow is open: the row pinned before the part, each screen whole (a fifth of a stretch
+  // after it has fully come in, clear of the next change), the cards back in
+  // after the return (stage); each screen whole and the last one held (in place). [] when nothing is open; null while
+  // a card is moving the page itself, or has just closed, so nothing else moves it then.
+  window.prothesisCardRests = function () {
+    if (anim || held || closing || performance.now() - changed < 700) return null;
+    if (!open || open.mode === 'rm') return [];
+    var V = vh(), out = [], k;
+    if (open.mode === 'stage') {
+      var s0 = docTop(stage) - STICK;
+      out.push(s0);
+      for (k = 0; k < open.n; k++) out.push(s0 + V * (D.part + D.pre + (k ? k - 0.2 : 0) * D.seg));
+      out.push(s0 + V * (D.part + D.pre + (open.n - 1) * D.seg + D.post + D.back));
+    } else {
+      var c0 = docTop(open.card) - open.settleTop;
+      for (k = 0; k < open.n; k++) out.push(c0 + V * (M.pre + (k ? k - 0.2 : 0) * M.seg));
+      out.push(c0 + open.L);
+    }
+    return out.map(Math.round);
+  };
 
   /* ---------- wiring ---------- */
   cards.forEach(function (c) {
