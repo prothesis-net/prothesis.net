@@ -289,6 +289,14 @@ footer a { color: inherit; }
   .card:hover .card-phone { transform: none; }
 }
 
+/* The chapters settle: when a scroll comes to rest between two chapters, the nearer one glides to the top (home page
+   only). "proximity" leaves the reader free inside a long chapter; it lets go while a card is open, so the scroll keeps
+   driving the phone, and under Reduce Motion. */
+html:has(body.home) { scroll-snap-type: y proximity; }
+.home .ch, .home .ch-app { scroll-snap-align: start end; }
+html:has(.cards-wrap.is-stage), html:has(.card.is-open) { scroll-snap-type: none; }
+@media (prefers-reduced-motion: reduce) { html:has(body.home) { scroll-snap-type: none; } }
+
 /* ---------- Phones ---------- */
 
 @media (max-width: 600px) {
