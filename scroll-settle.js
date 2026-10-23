@@ -7,6 +7,7 @@
      - "Our first app": its top, then (on phones) each card in the middle of the screen, then its bottom.
      - With a flow open, each flick is one screen; the glide skips the stretches of scroll where nothing on screen
        changes (the places come from cards.js), so the change is all there is to see.
+   On desktop a column of dots, one per chapter, shows where the reader is and takes them to any chapter.
    On phones the page follows the finger, then glides on (or back) on release, carrying on at the finger's own speed
    rather than starting again from still. Off under Reduce Motion, when the page
    is pinch-zoomed, and without JavaScript; the scroll bar still scrolls freely. */
@@ -143,11 +144,13 @@
       window.scrollTo(0, k < 1 ? at : t);   // fractions of a pixel: smoother on fine screens
       if (k < 1) { anim.id = requestAnimationFrame(frame); return; }
       anim = null;
-      if (pending) { var d = pending; pending = 0; step(d); }
+      if (pending) { var d = pending > 0 ? 1 : -1; pending -= d; step(d); }
     };
     anim.id = requestAnimationFrame(frame);
   }
   function stop() { if (anim) { cancelAnimationFrame(anim.id); anim = null; } }
+  // Steps asked for during a glide: up to two wait their turn; a turn the other way cancels them.
+  function queue(dir) { pending = pending * dir < 0 ? dir : Math.max(-2, Math.min(2, pending + dir)); }
 
   // One step in a direction, from where the page is (or from where a swipe began).
   function step(dir, from, speed) {
@@ -159,22 +162,26 @@
   }
   function goTo(t) { var L = lanes(); if (L !== null) glide(window.scrollY, t, deadZones(L)); }
 
-  /* ---------- wheel and trackpad: one flick, one step ---------- */
-  var lastWheel = 0, lastAbs = 0, acc = 0, spent = false;
+  /* ---------- wheel and trackpad: one gesture, one step ---------- */
+  // A gesture is a stream of wheel events with no pause longer than QUIET: one click of a notched wheel, a quick roll
+  // of several clicks, or a whole flick of a trackpad or free-spinning wheel, momentum and all. Its first push takes
+  // one step; the rest of the stream is spent. (A free-spinning wheel or a trackpad's momentum rises and falls on its
+  // own, so a rise inside a stream is not a new flick.) The one exception: once the glide is over and the stream's
+  // tail has all but died away, a clear new push is a new flick. Separate clicks during a glide wait their turn.
+  var QUIET = 220, lastWheel = 0, acc = 0, spent = false, recent = [];
   window.addEventListener('wheel', function (e) {
     if (off() || e.ctrlKey || Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
     e.preventDefault();
     var now = performance.now(), d = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? vh() : 1), abs = Math.abs(d);
-    // A new flick: after a pause, or a sudden surge over the fading tail of the last one (trackpad momentum).
-    var fresh = now - lastWheel > 160 || (abs > lastAbs * 1.6 && abs > 18);
-    lastWheel = now; lastAbs = abs;
-    if (fresh) { acc = 0; spent = false; }
+    var gap = now - lastWheel, dying = recent.length >= 4 && Math.max.apply(null, recent) < 6;
+    lastWheel = now; recent.push(abs); if (recent.length > 4) recent.shift();
+    if (gap > QUIET || (!anim && dying && abs >= 30)) { acc = 0; spent = false; }
     if (spent) return;
     acc += d;
     if (Math.abs(acc) < 12) return;
     spent = true; acc = 0;
     var dir = d > 0 ? 1 : -1;
-    if (anim) { pending = dir; return; }
+    if (anim) { queue(dir); return; }
     step(dir);
   }, { passive: false });
 
@@ -190,7 +197,7 @@
     else if (k === 'End') { e.preventDefault(); goTo(maxY()); return; }
     if (!dir) return;
     e.preventDefault();
-    if (anim) { pending = dir; return; }
+    if (anim) { queue(dir); return; }
     step(dir);
   });
 
@@ -227,4 +234,45 @@
     else goTo(tFrom);
   }, { passive: true });
   window.addEventListener('touchcancel', function () { if (tY !== null) { tY = null; goTo(tFrom); } }, { passive: true });
+
+  /* ---------- the chapter dots (desktop) ---------- */
+  // One dot per chapter at the right edge; the current one gold. Hover or focus shows the chapter's name: its own
+  // heading, or for the two chapters without one, words already on the page (the logo's name, the button's words).
+  // A dot glides to where scrolling would rest in that chapter. Hidden on phones and while a card's stage is open
+  // (style.css); with Reduce Motion it jumps.
+  function label(ch) {
+    var h = ch.querySelector('h2'), logo = ch.querySelector('.logo'), btn = ch.querySelector('.btn');
+    return h ? h.textContent.trim() : logo ? logo.alt : btn ? btn.textContent.trim() : '';
+  }
+  function toChapter(i) {
+    var L = lanes(), out = [];
+    if (L === null) return;
+    chapterStops(chapters[i], out);
+    var t = Math.round(Math.max(0, Math.min(maxY(), Math.min.apply(null, out))));
+    pending = 0;
+    if (mqRM.matches) { stop(); window.scrollTo(0, t); return; }
+    glide(window.scrollY, t, deadZones(L));
+  }
+  var nav = document.createElement('nav'), dots = chapters.map(function (ch, i) {
+    var b = document.createElement('button'), span = document.createElement('span');
+    b.type = 'button'; b.className = 'dot'; span.className = 'dot-label'; span.textContent = label(ch);
+    b.appendChild(span);
+    b.addEventListener('click', function () { toChapter(i); });
+    nav.appendChild(b);
+    return b;
+  });
+  nav.className = 'dots';
+  (document.querySelector('main') || document.body).appendChild(nav);
+  var current = -1, marking = 0;
+  function mark() {
+    marking = 0;
+    var mid = window.scrollY + vh() / 2, at = 0;
+    chapters.forEach(function (ch, i) { if (docTop(ch) <= mid) at = i; });
+    if (at === current) return;
+    current = at;
+    dots.forEach(function (d, i) { if (i === at) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current'); });
+  }
+  window.addEventListener('scroll', function () { if (!marking) marking = requestAnimationFrame(mark); }, { passive: true });
+  window.addEventListener('resize', mark);
+  mark();
 })();
