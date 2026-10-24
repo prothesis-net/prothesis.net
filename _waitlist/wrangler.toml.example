@@ -1,0 +1,24 @@
+# Copy to wrangler.toml and fill in the <…> values (the live copy is kept off GitHub). No secrets here: CLIENT_SECRET, ADMIN_TOKEN and IP_SALT are
+# Cloudflare secrets, fed from the Mac's Keychain (account "prothesis-waitlist").
+name = "prothesis-waitlist"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+workers_dev = true
+
+[triggers]
+crons = ["* * * * *"]           # every minute: sends the next batch of a queued announcement
+
+[[d1_databases]]
+binding = "DB"
+database_name = "prothesis-waitlist"
+database_id = "<from: npx wrangler d1 create prothesis-waitlist>"
+
+[vars]
+SITE_ORIGIN    = "https://prothesis.net"
+PUBLIC_URL     = "https://prothesis-waitlist.prothesis.workers.dev"
+SENDER         = "contact@prothesis.net"
+SENDER_NAME    = "Prothesis"
+POSTAL_ADDRESS = ""             # Albert, 23 Oct: no postal address. Empty = left out of every email.
+TENANT_ID      = "<Microsoft 365 tenant ID>"
+CLIENT_ID      = "<Entra app registration: Application (client) ID>"
+MAIL_MODE      = "graph"
