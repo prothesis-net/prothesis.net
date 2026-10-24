@@ -183,19 +183,19 @@ Prothesis LLC – Greater Chicago area, Illinois – contact@prothesis.net – �
 
 # Privacy page (`privacy.html`, reached at `/privacy`)
 
-[NOTE: Browser tab title: `Privacy – Prothesis`. The short Navy band (logo linked to `/`, tagline, golden arc) and the same footer as the home page. "Privacy" below is this page's H1. This page's wording was approved 2026-10-19 and is unchanged.]
+[NOTE: Browser tab title: `Privacy – Prothesis`. The short Navy band (logo linked to `/`, tagline, golden arc) and the same footer as the home page. "Privacy" below is this page's H1. This page's wording was approved 2026-10-19; "What we collect" and "Where it is kept" were changed for the waitlist form and approved by Albert 2026-10-23.]
 
 # Privacy
 
-*Last updated: 19 October 2026*
+*Last updated: 23 October 2026*
 
 **Who we are.** This website belongs to Prothesis LLC, based in the greater Chicago area, Illinois. You can reach us at contact@prothesis.net.
 
-**What we collect.** This website does not use cookies, analytics or trackers. If you join our waitlist, we collect the email address you give us, and nothing else.
+**What we collect.** This website does not use cookies, analytics or trackers. If you join our waitlist, we collect the email address you give us.
 
 **Why.** We use your email only to tell you when our app is ready and to send occasional news about it. We do not sell, rent or share your email with anyone else.
 
-**Where it is kept.** Waitlist sign-ups are stored with Cloudflare, which runs the sign-up for us, and the emails we send come from our Microsoft account. We keep your email address, when you signed up and when you confirmed, and nothing else.
+**Where it is kept.** Waitlist sign-ups are stored with Cloudflare, which runs the sign-up for us, and the emails we send come from our Microsoft account. We keep your email address, when you signed up and when you confirmed. To stop abuse, we briefly keep a scrambled form of your internet address, deleted within the hour.
 
 **Your choices.** You can ask us to remove your email at any time by writing to contact@prothesis.net, and every email we send will include a way to unsubscribe.
 
