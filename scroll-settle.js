@@ -7,7 +7,7 @@
      - "Our first app": its top, then (on phones) each card in the middle of the screen, then its bottom.
      - With a flow open, each flick is one screen; the glide skips the stretches of scroll where nothing on screen
        changes (the places come from cards.js), so the change is all there is to see.
-   On desktop a column of dots, one per chapter, shows where the reader is and takes them to any chapter.
+   On desktop a gold arc at the right edge shows where the reader is and takes them to any chapter.
    On phones the page follows the finger, then glides on (or back) on release, carrying on at the finger's own speed
    rather than starting again from still. Off under Reduce Motion, when the page
    is pinch-zoomed, and without JavaScript; the scroll bar still scrolls freely. */
@@ -235,11 +235,13 @@
   }, { passive: true });
   window.addEventListener('touchcancel', function () { if (tY !== null) { tY = null; goTo(tFrom); } }, { passive: true });
 
-  /* ---------- the chapter dots (desktop) ---------- */
-  // One dot per chapter at the right edge; the current one gold. Hover or focus shows the chapter's name: its own
-  // heading, or for the two chapters without one, words already on the page (the logo's name, the button's words).
-  // A dot glides to where scrolling would rest in that chapter. Hidden on phones and while a card's stage is open
-  // (style.css); with Reduce Motion it jumps.
+  /* ---------- the chapter arc (desktop) ---------- */
+  // A thin gold arc stands at the right edge, both ends on the edge, bowed a little into the page. A bolder glint on
+  // it (the opening arc's own glint) marks where the reader is and moves with the page from chapter to chapter. Over
+  // the arc the glint follows the pointer, the nearest chapter's name shows, and a click goes there. Each chapter also
+  // has a button on the arc for the keyboard. Names: the chapter's heading, or for the two chapters without one, words
+  // already on the page (the logo's name, the button's words). Hidden on phones and while a card's stage is open
+  // (style.css); with Reduce Motion the glint and the page jump.
   function label(ch) {
     var h = ch.querySelector('h2'), logo = ch.querySelector('.logo'), btn = ch.querySelector('.btn');
     return h ? h.textContent.trim() : logo ? logo.alt : btn ? btn.textContent.trim() : '';
@@ -253,26 +255,113 @@
     if (mqRM.matches) { stop(); window.scrollTo(0, t); return; }
     glide(window.scrollY, t, deadZones(L));
   }
-  var nav = document.createElement('nav'), dots = chapters.map(function (ch, i) {
-    var b = document.createElement('button'), span = document.createElement('span');
-    b.type = 'button'; b.className = 'dot'; span.className = 'dot-label'; span.textContent = label(ch);
-    b.appendChild(span);
-    b.addEventListener('click', function () { toChapter(i); });
+  // Where the page rests in each chapter (the place a click goes), for mapping the scroll onto the arc.
+  function restOf(i) { var out = []; chapterStops(chapters[i], out); return Math.max(0, Math.min(maxY(), Math.min.apply(null, out))); }
+
+  var SVGNS = 'http://www.w3.org/2000/svg', HALF = 196, PADV = 24, REACH = 46;   // half the arc's height; room above and below; room to its left
+  var nav = document.createElement('nav'), svg = document.createElementNS(SVGNS, 'svg'), tag = document.createElement('span');
+  nav.className = 'arcnav'; tag.className = 'arcnav-tag';
+  var stopsEl = chapters.map(function (ch, i) {
+    var b = document.createElement('button'), name = document.createElement('span');
+    b.type = 'button'; b.className = 'arcnav-stop'; name.className = 'vh'; name.textContent = label(ch);
+    b.appendChild(name);
+    b.addEventListener('focus', function () { focusAt = i; show(i); aim(); });
+    b.addEventListener('blur', function () { if (focusAt === i) { focusAt = -1; if (hoverAt === null) hide(); aim(); } });
     nav.appendChild(b);
     return b;
   });
-  nav.className = 'dots';
+  nav.insertBefore(svg, nav.firstChild);
+  nav.appendChild(tag);
   (document.querySelector('main') || document.body).appendChild(nav);
+
+  var G = {}, glintEl = null, hoverAt = null, focusAt = -1, theta = null, aimAt = 0, loop = 0;
+  // Circle through both ends on the window's right edge and an apex bowed left by BOW.
+  function build() {
+    var bow = window.innerWidth >= 1280 ? 26 : 18, W = bow + REACH, h = HALF, R = (h * h + bow * bow) / (2 * bow);
+    G = { W: W, H: 2 * (HALF + PADV), R: R, cx: W - bow + R, cy: PADV + h, max: Math.asin(h / R) };
+    G.span = 0.84 * G.max;
+    var pt = function (a) { return [G.cx - R * Math.cos(a), G.cy + R * Math.sin(a)]; };
+    var arc = function (a, b) { var p = pt(a), q = pt(b); return 'M ' + p[0] + ' ' + p[1] + ' A ' + R + ' ' + R + ' 0 0 0 ' + q[0] + ' ' + q[1]; };
+    var g = 30 / R;   // the glint: 60 px of the arc
+    nav.style.width = W + 'px'; nav.style.height = G.H + 'px';
+    svg.setAttribute('width', W); svg.setAttribute('height', G.H); svg.setAttribute('viewBox', '0 0 ' + W + ' ' + G.H);
+    svg.setAttribute('aria-hidden', 'true'); svg.setAttribute('focusable', 'false');
+    svg.innerHTML =
+      '<defs><filter id="an-halo" x="-400%" y="-60%" width="900%" height="220%"><feGaussianBlur stdDeviation="6"/></filter>' +
+      '<filter id="an-glow" x="-400%" y="-60%" width="900%" height="220%"><feGaussianBlur stdDeviation="1.6"/></filter>' +
+      '<linearGradient id="an-glint" gradientUnits="userSpaceOnUse" x1="0" y1="' + (G.cy - 30) + '" x2="0" y2="' + (G.cy + 30) + '">' +
+      '<stop offset="0" stop-color="#f2cc52" stop-opacity="0"/><stop offset=".28" stop-color="#f2cc52" stop-opacity=".55"/>' +
+      '<stop offset=".5" stop-color="#fff5c8" stop-opacity="1"/><stop offset=".72" stop-color="#f2cc52" stop-opacity=".55"/>' +
+      '<stop offset="1" stop-color="#f2cc52" stop-opacity="0"/></linearGradient></defs>' +
+      '<path class="arcnav-line" d="' + arc(-G.max, G.max) + '"/>' +
+      '<path class="arcnav-hit" d="' + arc(-G.max, G.max) + '"/>' +
+      '<g class="arcnav-glint"><path d="' + arc(-g, g) + '" stroke="url(#an-glint)" stroke-width="16" stroke-opacity=".55" filter="url(#an-halo)"/>' +
+      '<path d="' + arc(-g, g) + '" stroke="url(#an-glint)" stroke-width="6" stroke-opacity=".9" filter="url(#an-glow)"/>' +
+      '<path d="' + arc(-g, g) + '" stroke="url(#an-glint)" stroke-width="2.6"/></g>';
+    glintEl = svg.querySelector('.arcnav-glint');
+    stopsEl.forEach(function (b, i) { var p = pt(at(i)); b.style.left = p[0] + 'px'; b.style.top = p[1] + 'px'; });
+    G.pt = pt;
+    if (theta !== null) draw();
+  }
+  function at(i) { return -G.span + 2 * G.span * i / (chapters.length - 1); }   // a chapter's place on the arc
+  function nearest(a) { return Math.max(0, Math.min(chapters.length - 1, Math.round((a + G.span) / (2 * G.span) * (chapters.length - 1)))); }
+
+  function show(i) {
+    var p = G.pt(at(i));
+    tag.textContent = label(chapters[i]);
+    tag.style.right = (G.W - p[0] + 18) + 'px'; tag.style.top = p[1] + 'px';
+    nav.classList.add('naming');
+  }
+  function hide() { nav.classList.remove('naming'); }
+
+  // Where the glint should be: the pointer, a focused stop, or the page itself (between two chapters, in proportion).
+  function target() {
+    if (hoverAt !== null) return hoverAt;
+    if (focusAt > -1) return at(focusAt);
+    var y = window.scrollY, k = 0, n = chapters.length, rests = chapters.map(function (c, i) { return restOf(i); });
+    while (k < n - 1 && y >= rests[k + 1]) k++;
+    var f = k < n - 1 && rests[k + 1] > rests[k] ? Math.max(0, Math.min(1, (y - rests[k]) / (rests[k + 1] - rests[k]))) : 0;
+    return at(k + f);
+  }
+  function draw() { glintEl.setAttribute('transform', 'rotate(' + (-theta * 180 / Math.PI) + ' ' + G.cx + ' ' + G.cy + ')'); }
+  function aim() { aimAt = target(); if (!loop) loop = requestAnimationFrame(tick); }
+  function tick() {
+    loop = 0;
+    if (theta === null || mqRM.matches) theta = aimAt;
+    else theta += (aimAt - theta) * 0.2;
+    if (Math.abs(aimAt - theta) < 1e-4) theta = aimAt;
+    draw();
+    if (theta !== aimAt) loop = requestAnimationFrame(tick);
+  }
+
+  // The pointer: only the arc's strip and its stops take it (style.css), so the page beside it stays clickable.
+  function angleOf(e) {
+    var r = nav.getBoundingClientRect(), mx = e.clientX - r.left, my = e.clientY - r.top;
+    return Math.max(-G.span, Math.min(G.span, Math.atan2(my - G.cy, G.cx - mx)));
+  }
+  nav.addEventListener('pointermove', function (e) {
+    if (e.pointerType === 'touch') return;
+    hoverAt = angleOf(e); show(nearest(hoverAt)); aim();
+  });
+  nav.addEventListener('pointerleave', function () { hoverAt = null; if (focusAt > -1) show(focusAt); else hide(); aim(); });
+  nav.addEventListener('click', function (e) {
+    var b = e.target.closest('.arcnav-stop');
+    var i = e.detail === 0 && b ? stopsEl.indexOf(b) : nearest(angleOf(e));   // a key press on a stop, or where the pointer is
+    toChapter(i);
+  });
+
   var current = -1, marking = 0;
   function mark() {
     marking = 0;
-    var mid = window.scrollY + vh() / 2, at = 0;
-    chapters.forEach(function (ch, i) { if (docTop(ch) <= mid) at = i; });
-    if (at === current) return;
-    current = at;
-    dots.forEach(function (d, i) { if (i === at) d.setAttribute('aria-current', 'true'); else d.removeAttribute('aria-current'); });
+    var mid = window.scrollY + vh() / 2, here = 0;
+    chapters.forEach(function (ch, i) { if (docTop(ch) <= mid) here = i; });
+    aim();
+    if (here === current) return;
+    current = here;
+    stopsEl.forEach(function (b, i) { if (i === here) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current'); });
   }
   window.addEventListener('scroll', function () { if (!marking) marking = requestAnimationFrame(mark); }, { passive: true });
-  window.addEventListener('resize', mark);
+  window.addEventListener('resize', function () { build(); mark(); });
+  build();
   mark();
 })();

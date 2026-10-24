@@ -289,27 +289,28 @@ footer a { color: inherit; }
   .card:hover .card-phone { transform: none; }
 }
 
-/* ---------- The chapter dots (desktop; made by scroll-settle.js) ---------- */
-/* Rings in Linen so they read on Navy and on Slate Blue alike; the current chapter's filled Pure Gold. The name shows
-   on hover or focus, Linen on a Navy chip. Gone while a card's stage is open: the stage has its own ×. */
+/* ---------- The chapter arc (desktop; made by scroll-settle.js) ---------- */
+/* A thin gold arc at the right edge, its ends on the edge; its glint is the opening arc's own. Only the strip along
+   the arc and the chapter stops on it take the pointer, so the page beside it stays clickable. The chapter's name
+   shows on hover or focus, Linen on a Navy chip. Gone while a card's stage is open: the stage has its own ×. */
 
-.dots { display: none; }
+.arcnav { display: none; }
 @media (min-width: 1024px) {
-  .dots { display: flex; flex-direction: column; position: fixed; z-index: 5; right: 2px; top: 50%; transform: translateY(-50%);
+  .arcnav { display: block; position: fixed; z-index: 5; right: 0; top: 50%; transform: translateY(-50%); pointer-events: none;
     transition: opacity .3s ease, visibility 0s linear 0s; }
-  html:has(.cards-wrap.is-stage) .dots { opacity: 0; visibility: hidden; transition: opacity .3s ease, visibility 0s linear .3s; }
-  .dot { position: relative; width: 22px; height: 28px; padding: 0; border: 0; background: none; cursor: pointer; }   /* narrow: clear of the cards at 1024 */
-  .dot::before { content: ""; position: absolute; left: 50%; top: 50%; width: 9px; height: 9px; margin: -4.5px 0 0 -4.5px;
-    border: 1.5px solid var(--linen); border-radius: 50%; box-sizing: border-box; transition: transform .25s ease; }
-  .dot:hover::before { background: rgba(243,243,237,.45); }
-  .dot[aria-current="true"]::before { background: var(--gold); transform: scale(1.35); }
-  .dot-label { position: absolute; right: calc(100% + 4px); top: 50%; transform: translate(6px, -50%); padding: 5px 10px; border-radius: 6px;
+  html:has(.cards-wrap.is-stage) .arcnav { opacity: 0; visibility: hidden; transition: opacity .3s ease, visibility 0s linear .3s; }
+  .arcnav svg { position: absolute; left: 0; top: 0; overflow: visible; }
+  .arcnav-line { fill: none; stroke: #D6BA6B; stroke-width: 1.5; stroke-opacity: .75; }
+  .arcnav-hit { fill: none; stroke: transparent; stroke-width: 40; pointer-events: stroke; cursor: pointer; }
+  .arcnav-glint path { fill: none; stroke-linecap: round; }
+  .arcnav-stop { position: absolute; width: 28px; height: 28px; margin: -14px 0 0 -14px; padding: 0; border: 0; border-radius: 50%;
+    background: none; cursor: pointer; pointer-events: auto; }
+  .arcnav-tag { position: absolute; transform: translate(6px, -50%); padding: 5px 10px; border-radius: 6px;
     background: var(--navy); color: var(--linen); font-size: 13px; line-height: 1.3; letter-spacing: .03em; white-space: nowrap;
     opacity: 0; pointer-events: none; transition: opacity .2s ease, transform .2s ease; }
-  .dot:hover .dot-label, .dot:focus-visible .dot-label { opacity: 1; transform: translate(0, -50%); }
+  .arcnav.naming .arcnav-tag { opacity: 1; transform: translate(0, -50%); }
 }
-@media (min-width: 1280px) { .dots { right: 14px; } .dot { width: 28px; } }
-@media (prefers-reduced-motion: reduce) { .dots, .dot::before, .dot-label { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .arcnav, .arcnav-tag { transition: none; } }
 
 /* ---------- Phones ---------- */
 
