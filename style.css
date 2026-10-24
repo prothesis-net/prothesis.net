@@ -232,6 +232,30 @@ html:not(.js) .card .flow img { display: block; width: 100%; height: auto; borde
 }
 .fine { font-size: 16px; font-style: italic; color: var(--sea); }
 
+/* The waitlist form (chapter 10): square corners like the button, the field outlined in Linen on Navy, the button
+   Pure Gold. It posts to the waitlist Worker; waitlist.js answers in place, and without JavaScript the Worker answers
+   with its own page. Phones: the field above the button, both full width. */
+.join { display: flex; justify-content: center; max-width: 600px; margin: 40px auto 18px; }
+.join-email {
+  flex: 1 1 auto; min-width: 0; min-height: 64px; padding: 0 22px; margin: 0;
+  border: 1.5px solid var(--linen); border-right: 0; border-radius: 0; background: transparent; color: var(--linen);
+  font-family: "Prothesis Basic"; font-size: clamp(18px, 1.6vw, 22px); line-height: 1.2;
+}
+.join-email::placeholder { color: var(--sea); opacity: 1; }
+.join-email:focus-visible { outline: 3px solid var(--linen); outline-offset: 4px; }
+.join .btn { flex: none; margin: 0; min-height: 64px; border: 0; cursor: pointer; font-family: "Prothesis Basic"; }
+.join .btn[disabled] { opacity: .6; cursor: default; }
+.join-trap { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }   /* the field bots fill in */
+.join-msg { min-height: 1.6em; margin-top: 4px; font-size: 18px; line-height: 1.45; }
+.join-msg.is-error { color: var(--gold); }
+.join-done { margin: 40px auto 28px; font-size: clamp(20px, 2vw, 28px); line-height: 1.45; color: var(--linen); }
+.join-done::before { content: ""; display: block; width: 64px; height: 2px; background: var(--gold); margin: 0 auto 24px; }
+@media (max-width: 600px) {
+  .join { flex-direction: column; gap: 12px; }
+  .join-email { border-right: 1.5px solid var(--linen); }
+  .join .btn { width: 100%; }
+}
+
 /* ---------- Footer ---------- */
 
 footer { background: var(--linen); color: var(--slate); text-align: center; font-size: 15px; line-height: 1.6; padding: 40px 24px 28px; }

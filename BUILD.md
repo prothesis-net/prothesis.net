@@ -28,7 +28,7 @@ Do not create, resize or convert any image. Leave `CONTENT.md`, `BUILD.md`, `REA
 
 - **Plain HTML and CSS, plus the reveal script** — one line in `<head>` and one small block at the end of `<body>` (both in "Motion" below), and nothing else. No frameworks, no build step, no package files.
 - **Without the script, everything is visible.** The `<head>` line adds a `js` class to `<html>`; only `.js .r` starts hidden. If JavaScript is off or fails, the page reads complete and still.
-- **Nothing external.** No Google Fonts, no CDNs, no analytics, no cookies, no trackers, no embeds, no forms on the page. Every file a page loads comes from this repository. **One exception:** the "Join the waitlist" button is an ordinary link to the Microsoft Form; nothing from Microsoft is loaded into the page.
+- **Nothing external.** No Google Fonts, no CDNs, no analytics, no cookies, no trackers, no embeds. Every file a page loads comes from this repository. **One exception:** the waitlist form in the last chapter posts the email to the waitlist Worker (`https://prothesis-waitlist.prothesis.workers.dev/subscribe`, a Cloudflare Worker, set up 2026-10-23). `waitlist.js` sends it and answers in place; without JavaScript the form posts by itself and the Worker answers with its own page. Nothing from Cloudflare is loaded into the page. If the Worker ever breaks, the fallback is the old button, an ordinary link to the Microsoft Form `https://forms.cloud.microsoft/r/uGidT0636d`.
 - **Text exactly as in `CONTENT.md`.** Keep its curly quotes, apostrophes, en and em dashes, and every "&". Never render anything inside `[NOTE: …]` or any `##` label. `KICKER:` is a label word, not text — render only what follows it.
 - **"&" never ends a line.** In page text write each one as `&amp;&nbsp;` joined to the next word. Inside attributes (`content="…"`, `aria-label`) write `&amp;` followed by a plain space.
 - **Root-absolute paths everywhere** (`/style.css`, `/assets/…`, `/favicon.png`), so `404.html` works at any address.
@@ -238,7 +238,7 @@ Only `opacity` and `transform` animate. Nothing else moves except the glint. Und
 - Every font file and image loads (no 404s); no request leaves the domain.
 - No text in `#9A734D`; every text colour matches the Colours table.
 - Search the built HTML: "Consulting", "lorem", "NOTE", "KICKER", "{LOGO}" — none present. No "&" is followed by a plain space (each is `&amp;&nbsp;`).
-- The button's `href` is exactly `https://forms.cloud.microsoft/r/uGidT0636d`.
+- The waitlist form's `action` is exactly `https://prothesis-waitlist.prothesis.workers.dev/subscribe`, `method="post"`, with the email field, the hidden `website` field and the "Join the waitlist" button.
 - The footer reads exactly: `Prothesis LLC – Greater Chicago area, Illinois – contact@prothesis.net – © 2026 Prothesis LLC – Privacy`.
 - No image beyond the logo, the mark, the icons, the OG image and the six `bg-*.jpg` backgrounds. Chapters 2 and 3 load no image at all.
 - The tagline under the logo (home, privacy and 404 pages) has **no** closing period; chapter 4's headline "Translation ignites purpose." **keeps** its period. Search the HTML for "ignites purpose." — exactly one match, in chapter 4.

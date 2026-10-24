@@ -195,7 +195,13 @@
     <p class="drawn r s1">No one is keeping score. He is keeping you.</p>
     <p class="drawn r s2">Come when you are drawn, not when you are due.</p>
     <p class="lead ask r s3">Leave your email &amp;&nbsp;we’ll let you know when it’s ready.</p>
-    <p class="r s4"><a class="btn" href="https://forms.cloud.microsoft/r/uGidT0636d" target="_blank" rel="noopener" aria-label="Join the waitlist (opens in a new tab)">Join the waitlist</a></p>
+    <form class="join r s4" action="https://prothesis-waitlist.prothesis.workers.dev/subscribe" method="post">
+      <label class="vh" for="join-email">Email address</label>
+      <input class="join-email" id="join-email" name="email" type="email" required autocomplete="email" inputmode="email" spellcheck="false" maxlength="254" placeholder="you@example.com">
+      <span class="join-trap" aria-hidden="true"><label>Leave empty <input name="website" tabindex="-1" autocomplete="off"></label></span>
+      <button class="btn" type="submit">Join the waitlist</button>
+    </form>
+    <p class="join-msg" role="status" aria-live="polite"></p>
     <p class="fine r s4">We’ll only write to you about this phone app. Unsubscribe any time. – <a href="/privacy">Privacy</a></p>
   </div>
 </section>
@@ -213,5 +219,6 @@ els.forEach(function(e){io.observe(e)});})();
 <script src="/cards.js" defer></script>
 <script src="/screen-dates.js" defer></script>
 <script src="/scroll-settle.js" defer></script>
+<script src="/waitlist.js" defer></script>
 </body>
 </html>

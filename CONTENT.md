@@ -101,7 +101,7 @@ Leave your email & we’ll let you know when it’s ready.
 
 Join the waitlist
 
-[NOTE: "Join the waitlist" is the button: an `<a>` to `https://forms.cloud.microsoft/r/uGidT0636d`, `target="_blank" rel="noopener"`, `aria-label="Join the waitlist (opens in a new tab)"`. No product or app name anywhere — it is held until the trademark is settled.]
+[NOTE: "Join the waitlist" is the button of the waitlist form (2026-10-23): an email field (placeholder "you@example.com", read aloud as "Email address") beside the button, on phones above it. It posts to the waitlist Worker; see BUILD.md. After sending, the form is replaced by "Thank you. Please check your inbox and confirm your email." Messages if something is wrong: "That doesn’t look like an email address. Please check it." / "Too many tries just now. Please wait a few minutes and try again." / "Something went wrong. Please try again, or write to contact@prothesis.net." No product or app name anywhere — it is held until the trademark is settled.]
 
 *We’ll only write to you about this phone app. Unsubscribe any time.* – Privacy
 
@@ -195,7 +195,7 @@ Prothesis LLC – Greater Chicago area, Illinois – contact@prothesis.net – �
 
 **Why.** We use your email only to tell you when our app is ready and to send occasional news about it. We do not sell, rent or share your email with anyone else.
 
-**Where it is kept.** Waitlist sign-ups are collected through Microsoft Forms and stored in our Microsoft 365 account. Microsoft processes this data for us under its own privacy terms.
+**Where it is kept.** Waitlist sign-ups are stored with Cloudflare, which runs the sign-up for us, and the emails we send come from our Microsoft 365 account. We keep your email address, when you signed up and when you confirmed, and nothing else.
 
 **Your choices.** You can ask us to remove your email at any time by writing to contact@prothesis.net, and every email we send will include a way to unsubscribe.
 
