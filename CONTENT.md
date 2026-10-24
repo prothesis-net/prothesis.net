@@ -195,7 +195,7 @@ Prothesis LLC – Greater Chicago area, Illinois – contact@prothesis.net – �
 
 **Why.** We use your email only to tell you when our app is ready and to send occasional news about it. We do not sell, rent or share your email with anyone else.
 
-**Where it is kept.** Waitlist sign-ups are stored with Cloudflare, which runs the sign-up for us, and the emails we send come from our Microsoft 365 account. We keep your email address, when you signed up and when you confirmed, and nothing else.
+**Where it is kept.** Waitlist sign-ups are stored with Cloudflare, which runs the sign-up for us, and the emails we send come from our Microsoft account. We keep your email address, when you signed up and when you confirmed, and nothing else.
 
 **Your choices.** You can ask us to remove your email at any time by writing to contact@prothesis.net, and every email we send will include a way to unsubscribe.
 
