@@ -1,0 +1,25 @@
+# Copy to wrangler.toml and fill in the <…> values. Secrets are never written here:
+#   npx wrangler secret put CLIENT_SECRET   (from the Entra app registration)
+#   npx wrangler secret put ADMIN_TOKEN     (a long random string, for export and announce)
+#   npx wrangler secret put IP_SALT         (another long random string)
+name = "prothesis-waitlist"
+main = "src/index.js"
+compatibility_date = "2026-10-01"
+
+[triggers]
+crons = ["* * * * *"]           # every minute: sends the next batch of a queued announcement
+
+[[d1_databases]]
+binding = "DB"
+database_name = "prothesis-waitlist"
+database_id = "<from: npx wrangler d1 create prothesis-waitlist>"
+
+[vars]
+SITE_ORIGIN    = "https://prothesis.net"
+PUBLIC_URL     = "https://prothesis-waitlist.<your-subdomain>.workers.dev"
+SENDER         = "contact@prothesis.net"
+SENDER_NAME    = "Prothesis"
+POSTAL_ADDRESS = "<a postal address or P.O. box: required in commercial email (CAN-SPAM)>"
+TENANT_ID      = "<Microsoft 365 tenant ID>"
+CLIENT_ID      = "<Entra app registration: Application (client) ID>"
+MAIL_MODE      = "graph"         # "log" records emails instead of sending them (testing)

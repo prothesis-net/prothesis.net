@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prothesis — waitlist mock-up</title>
+<link rel="icon" href="/favicon.png">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/waitlist.css">
+</head>
+<body class="home">
+<main>
+<!-- The site's last chapter, as it is, with the waitlist form in place of the Microsoft Forms link. -->
+<section class="ch ch-drawn" id="ask">
+  <div class="inner">
+    <p class="drawn">Nothing is counted. What you hear is kept.</p>
+    <p class="drawn">No one is keeping score. He is keeping you.</p>
+    <p class="drawn">Come when you are drawn, not when you are due.</p>
+    <p class="lead ask">Leave your email &amp;&nbsp;we’ll let you know when it’s ready.</p>
+    <form class="join" action="http://localhost:8787/subscribe" method="post">
+      <label class="vh" for="join-email">Email address</label><!-- DRAFT: read aloud only -->
+      <input class="join-email" id="join-email" name="email" type="email" required autocomplete="email" inputmode="email" spellcheck="false" placeholder="you@example.com"><!-- DRAFT placeholder -->
+      <span class="join-trap" aria-hidden="true"><label>Leave empty <input name="website" tabindex="-1" autocomplete="off"></label></span>
+      <button class="btn" type="submit">Join the waitlist</button>
+    </form>
+    <p class="join-msg" role="status" aria-live="polite"></p>
+    <p class="fine">We’ll only write to you about this phone app. Unsubscribe any time. – <a href="/privacy">Privacy</a></p>
+  </div>
+</section>
+</main>
+<footer>
+  <p><span style="white-space:nowrap">Prothesis LLC</span> – <span style="white-space:nowrap">Greater Chicago area, Illinois</span> – <span style="white-space:nowrap"><a href="mailto:contact@prothesis.net">contact@prothesis.net</a></span> – <span style="white-space:nowrap"><a href="/about">About</a></span> – <span style="white-space:nowrap">© 2026 Prothesis LLC</span> – <span style="white-space:nowrap"><a href="/privacy">Privacy</a></span></p>
+</footer>
+<script src="/waitlist.js" defer></script>
+</body>
+</html>
