@@ -278,7 +278,7 @@
   // Circle through both ends on the window's right edge and an apex bowed left by BOW.
   function build() {
     var bow = window.innerWidth >= 1280 ? 26 : 18, W = bow + REACH, h = HALF, R = (h * h + bow * bow) / (2 * bow);
-    G = { W: W, H: 2 * (HALF + PADV), R: R, cx: W - bow + R, cy: PADV + h, max: Math.asin(h / R) };
+    G = { W: W, H: 2 * (HALF + PADV), R: R, cx: W - bow + R, cy: PADV + h, max: Math.asin(h / R), bow: bow };
     G.span = 0.84 * G.max;
     var pt = function (a) { return [G.cx - R * Math.cos(a), G.cy + R * Math.sin(a)]; };
     var arc = function (a, b) { var p = pt(a), q = pt(b); return 'M ' + p[0] + ' ' + p[1] + ' A ' + R + ' ' + R + ' 0 0 0 ' + q[0] + ' ' + q[1]; };
@@ -331,6 +331,7 @@
     else theta += (aimAt - theta) * 0.2;
     if (Math.abs(aimAt - theta) < 1e-4) theta = aimAt;
     draw();
+    if (lift && lift.svg.style.display === 'block') liftFrame();   // the lift's glint ends where this one is
     if (theta !== aimAt) loop = requestAnimationFrame(tick);
   }
 
@@ -350,19 +351,117 @@
     toChapter(i);
   });
 
+  /* ---------- the opening's arc lifts into the chapter arc (desktop) ---------- */
+  // Between the opening and the second chapter the scroll lifts the horizon's golden line and turns it into the arc at
+  // the right edge: one arc whose chord (its middle, length and angle, 0 to 90 degrees, the bulge turning from up to
+  // left) and bow follow the scroll, as do its stroke (the horizon's deeper line becomes the side arc's) and its glint
+  // (from wherever the horizon's glint is sliding to the chapter arc's own). The horizon's soft halo and glow stay where
+  // they are and fade as the line lifts away: fading a still layer is nearly free, where re-blurring a moving one every
+  // frame stutters (Safari draws SVG blurs on the CPU). At either end the line lies exactly on the real one, which takes
+  // over: the horizon at the top, the chapter arc from the second chapter on.
+  // Not on phones (no chapter arc there) or under Reduce Motion (the chapter arc simply appears with the second chapter).
+  var sky = document.querySelector('.ch-open .firmament'), skyGlint = sky && sky.querySelector('.glint');
+  var lift = null, rest1 = 1, skyAt = 0;
+  function morphing() { return !!sky && mqWide.matches && !mqRM.matches; }
+  function measure() { rest1 = Math.max(1, Math.round(restOf(1))); }   // rounded, as the glide's own target is
+  function el(name, attrs) { var e = document.createElementNS(SVGNS, name); for (var k in attrs) e.setAttribute(k, attrs[k]); return e; }
+  function makeLift() {
+    lift = { svg: el('svg', { class: 'arclift', 'aria-hidden': 'true', focusable: 'false' }) };
+    var defs = el('defs', {});
+    ['ghalo', 'gglow'].forEach(function (n) {
+      var f = el('filter', { id: 'al-' + n, filterUnits: 'userSpaceOnUse' }), b = el('feGaussianBlur', { stdDeviation: 1 });
+      f.appendChild(b); defs.appendChild(f); lift[n + 'F'] = f; lift[n + 'B'] = b;
+    });
+    var gr = el('linearGradient', { id: 'al-glint', gradientUnits: 'userSpaceOnUse' });
+    [[0, 0], [0.28, 0.55], [0.5, 1], [0.72, 0.55], [1, 0]].forEach(function (st) {
+      gr.appendChild(el('stop', { offset: st[0], 'stop-color': st[0] === 0.5 ? '#fff5c8' : '#f2cc52', 'stop-opacity': st[1] }));
+    });
+    defs.appendChild(gr); lift.grad = gr; lift.svg.appendChild(defs);
+    lift.line = el('path', {});
+    lift.gh = el('path', { class: 'g', stroke: 'url(#al-glint)', filter: 'url(#al-ghalo)' });
+    lift.gg = el('path', { class: 'g', stroke: 'url(#al-glint)', filter: 'url(#al-gglow)' });
+    lift.gc = el('path', { class: 'g', stroke: 'url(#al-glint)' });
+    ['line', 'gh', 'gg', 'gc'].forEach(function (k) { lift.svg.appendChild(lift[k]); });
+    document.body.appendChild(lift.svg);
+  }
+  function mix(a, b, t) { return a + (b - a) * t; }
+  function ramp(a, b, t) { t = Math.max(0, Math.min(1, (t - a) / (b - a))); return t * t * (3 - 2 * t); }
+  function seg(C, R, n, d, a, b) {   // the stretch of the circle between angles a and b (from the apex, b nearer the chord's B end)
+    var P = function (t) { return [C[0] + R * (n[0] * Math.cos(t) - d[0] * Math.sin(t)), C[1] + R * (n[1] * Math.cos(t) - d[1] * Math.sin(t))]; };
+    var p = P(a), q = P(b);
+    return { d: 'M ' + p[0] + ' ' + p[1] + ' A ' + R + ' ' + R + ' 0 0 1 ' + q[0] + ' ' + q[1], p: p, q: q };
+  }
+  function liftFrame() {
+    var on = morphing(), y = window.scrollY, p = y >= rest1 - 0.5 ? 1 : on ? Math.max(0, y / rest1) : 0;
+    if (sky) {   // the horizon keeps its halo and glow, fading; its line and glint are lifted
+      sky.classList.toggle('is-lifting', on && p > 0);
+      sky.style.opacity = on && p > 0 ? 1 - ramp(0, 0.35, p) : '';
+    }
+    if (!on || p <= 0 || p >= 1) { if (lift) lift.svg.style.display = 'none'; return; }
+    if (!lift) makeLift();
+    // The horizon as it sits on screen now (viewBox 0 0 1600 220, xMidYMax slice; circle (800, 1700), r 1600).
+    var r = sky.getBoundingClientRect(), k = Math.max(r.width / 1600, r.height / 220);
+    var R0 = 1600 * k, cy0 = r.top + r.height - 220 * k + 1700 * k, half0 = r.width / 2, end0 = cy0 - Math.sqrt(R0 * R0 - half0 * half0);
+    // Where the horizon's glint is sliding right now (it keeps going while the lift is out), so either end matches.
+    var m = skyGlint ? getComputedStyle(skyGlint).transform : 'none', v = m.match(/matrix\(([^,]+),\s*([^,]+)/);
+    skyAt = v ? Math.atan2(+v[2], +v[1]) : 0;
+    // And the chapter arc: ends on the right edge, HALF above and below the middle of the window, bowed G.bow.
+    var W = document.documentElement.clientWidth, H = document.documentElement.clientHeight;
+    // It draws in first (length and bow, mostly in the first half), then turns (mostly in the second), so its ends
+    // never swing on a long arm; the middle travels with the page.
+    var t = ramp(0, 1, p), draw_in = ramp(0, 0.6, p), turn = ramp(0.2, 1, p);   // eased into both ends, so each hand-off is exact
+    var mx = mix(r.left + half0, W, t), my = mix(end0, H / 2, t), L = mix(half0, HALF, draw_in), bow = mix(R0 - (cy0 - end0), G.bow, draw_in);
+    var a = -Math.PI / 2 * turn, d = [Math.cos(a), Math.sin(a)], n = [d[1], -d[0]];
+    var R = (L * L + bow * bow) / (2 * bow), C = [mx - n[0] * (R - bow), my - n[1] * (R - bow)], ends = Math.asin(Math.min(1, L / R));
+    var arc = seg(C, R, n, d, ends, -ends).d;
+    // The glint, by distance along the arc from its apex: from the horizon's to the chapter arc's own place.
+    var s = mix(-skyAt * R0, G.R * (theta === null ? at(1) : theta), t), g = mix(0.0625 * R0, 30, t), gl = seg(C, R, n, d, (s + g) / R, (s - g) / R);
+    lift.svg.setAttribute('width', W); lift.svg.setAttribute('height', H); lift.svg.style.display = 'block';
+    // The glint's blurs only as wide as its strokes need: a whole-window filter region would be redrawn every frame.
+    var gm = seg(C, R, n, d, s / R, s / R).p;
+    box(lift.ghaloF, [gl.p, gl.q, gm], 40); box(lift.gglowF, [gl.p, gl.q, gm], 14);
+    lift.ghaloB.setAttribute('stdDeviation', mix(0.01, 6, t)); lift.gglowB.setAttribute('stdDeviation', 1.6);
+    set(lift.line, arc, mix(1.5 * k, 1.5, t), mix(1, 0.75, t));
+    lift.line.setAttribute('stroke', 'rgb(' + Math.round(mix(176, 214, t)) + ',' + Math.round(mix(138, 186, t)) + ',' + Math.round(mix(52, 107, t)) + ')');
+    lift.grad.setAttribute('x1', gl.p[0]); lift.grad.setAttribute('y1', gl.p[1]); lift.grad.setAttribute('x2', gl.q[0]); lift.grad.setAttribute('y2', gl.q[1]);
+    set(lift.gh, gl.d, mix(5 * k, 16, t), mix(0.25, 0.55, t));
+    set(lift.gg, gl.d, mix(1.8 * k, 6, t), mix(0, 0.9, t));
+    set(lift.gc, gl.d, mix(1.8 * k, 2.6, t), 1);
+  }
+  function set(e, path, w, o) { e.style.display = o < 0.005 ? 'none' : ''; e.setAttribute('d', path); e.setAttribute('stroke-width', w); e.setAttribute('stroke-opacity', o); }
+  function box(f, pts, m) {
+    var xs = pts.map(function (q) { return q[0]; }), ys = pts.map(function (q) { return q[1]; });
+    var x = Math.min.apply(null, xs) - m, y = Math.min.apply(null, ys) - m;
+    f.setAttribute('x', x); f.setAttribute('y', y);
+    f.setAttribute('width', Math.max.apply(null, xs) + m - x); f.setAttribute('height', Math.max.apply(null, ys) + m - y);
+  }
+  // The hand-off is instant (the two lie on each other), so neither fades.
+  function setAway(on) {
+    if (nav.classList.contains('is-away') === on) return;
+    nav.style.transition = 'none';
+    nav.classList.toggle('is-away', on);
+    void nav.offsetWidth;
+    requestAnimationFrame(function () { nav.style.transition = ''; });
+  }
+
   var current = -1, marking = 0;
   function mark() {
     marking = 0;
     var mid = window.scrollY + vh() / 2, here = 0;
     chapters.forEach(function (ch, i) { if (docTop(ch) <= mid) here = i; });
     aim();
+    liftFrame();
+    // Not on the opening chapter: on desktop it appears as the horizon's arc arrives in its place, otherwise with the second.
+    setAway(morphing() ? window.scrollY < rest1 - 0.5 : here === 0);
     if (here === current) return;
     current = here;
     stopsEl.forEach(function (b, i) { if (i === here) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current'); });
-    nav.classList.toggle('is-away', here === 0);   // not on the opening chapter: it fades in with the second
   }
   window.addEventListener('scroll', function () { if (!marking) marking = requestAnimationFrame(mark); }, { passive: true });
-  window.addEventListener('resize', function () { build(); mark(); });
+  window.addEventListener('resize', function () { build(); measure(); mark(); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { measure(); mark(); });
+  window.addEventListener('load', function () { measure(); mark(); });
   build();
+  measure();
   mark();
 })();
