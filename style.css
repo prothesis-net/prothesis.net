@@ -292,13 +292,14 @@ footer a { color: inherit; }
 /* ---------- The chapter arc (desktop; made by scroll-settle.js) ---------- */
 /* A thin gold arc at the right edge, its ends on the edge; its glint is the opening arc's own. Only the strip along
    the arc and the chapter stops on it take the pointer, so the page beside it stays clickable. The chapter's name
-   shows on hover or focus, Linen on a Navy chip. Gone while a card's stage is open: the stage has its own ×. */
+   shows on hover or focus, Linen on a Navy chip. Not on the opening chapter (it fades in with the second), and gone
+   while a card's stage is open: the stage has its own ×. */
 
 .arcnav { display: none; }
 @media (min-width: 1024px) {
   .arcnav { display: block; position: fixed; z-index: 5; right: 0; top: 50%; transform: translateY(-50%); pointer-events: none;
-    transition: opacity .3s ease, visibility 0s linear 0s; }
-  html:has(.cards-wrap.is-stage) .arcnav { opacity: 0; visibility: hidden; transition: opacity .3s ease, visibility 0s linear .3s; }
+    transition: opacity .5s ease, visibility 0s linear 0s; }
+  .arcnav.is-away, html:has(.cards-wrap.is-stage) .arcnav { opacity: 0; visibility: hidden; transition: opacity .5s ease, visibility 0s linear .5s; }
   .arcnav svg { position: absolute; left: 0; top: 0; overflow: visible; }
   .arcnav-line { fill: none; stroke: #D6BA6B; stroke-width: 1.5; stroke-opacity: .75; }
   .arcnav-hit { fill: none; stroke: transparent; stroke-width: 40; pointer-events: stroke; cursor: pointer; }

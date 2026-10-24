@@ -359,6 +359,7 @@
     if (here === current) return;
     current = here;
     stopsEl.forEach(function (b, i) { if (i === here) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current'); });
+    nav.classList.toggle('is-away', here === 0);   // not on the opening chapter: it fades in with the second
   }
   window.addEventListener('scroll', function () { if (!marking) marking = requestAnimationFrame(mark); }, { passive: true });
   window.addEventListener('resize', function () { build(); mark(); });
