@@ -47,6 +47,8 @@
         else if (p === end) keep[keep.length - 1] = Math.max(keep[keep.length - 1], p);
         return keep;
       }, [pts[0]]);
+      // Only a little taller than the screen (on desktop, top and bottom merged): one stop, or the chapter is skipped.
+      if (pts.length === 1) { out.push(pts[0]); return; }
       for (var i = 0; i < pts.length - 1; i++) fill(pts[i], pts[i + 1], out);
       return;
     }
