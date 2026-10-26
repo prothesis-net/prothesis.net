@@ -4,7 +4,8 @@
    At rest one chapter fills the screen; the next is never half in view.
      - A chapter rests at its top; one taller than the screen also at its bottom (more steps if it is much taller), so
        nothing is out of reach and no step is longer than a screen.
-     - "Our first app": its top, then (on phones) each card in the middle of the screen, then its bottom.
+     - "Our first app": its top (on desktop, as low as it takes to show the cards whole), then (on phones) each card in
+       the middle of the screen, then its bottom.
      - With a flow open, each flick is one screen; the glide skips the stretches of scroll where nothing on screen
        changes (the places come from cards.js), so the change is all there is to see.
    On desktop a gold arc at the right edge shows where the reader is and takes them to any chapter.
@@ -18,6 +19,7 @@
   var mqWide = window.matchMedia('(min-width: 1024px)');
 
   var STEP = 0.85;   // the longest step inside a tall chapter, as a share of the screen
+  var CARD_GAP = 40, appRowH = 0;   // "Our first app" on desktop: room below the cards at its first stop; the row's height
   var anim = null, pending = 0;
 
   function vh() { return window.innerHeight; }
@@ -36,14 +38,21 @@
     if (end <= top + 1) { out.push(top); return; }
     if (ch.classList.contains('ch-app')) {
       var pts = [top];
+      // Desktop: the first stop shows the four cards whole, their bottom CARD_GAP above the screen's edge, even if
+      // the room above the heading (or, on a short screen, the arc) goes. The row's height is read with the cards closed.
+      var stage = ch.querySelector('.cards-stage'), row = ch.querySelector('.cards-row');
+      if (row && !ch.querySelector('.cards-wrap.is-stage')) appRowH = row.offsetHeight;
+      if (mqWide.matches && stage) pts[0] = Math.min(end, Math.max(top, docTop(stage) + appRowH + CARD_GAP - V));
       if (!mqWide.matches) [].forEach.call(ch.querySelectorAll('.card'), function (c) {
         pts.push(docTop(c) + c.offsetHeight / 2 - V / 2);
       });
       pts.push(end);
       pts = pts.filter(function (p) { return p >= top && p <= end; }).sort(byNum);
-      // A card already whole at the previous stop needs no step of its own.
+      // A card already whole at the previous stop needs no step of its own. On desktop the two stops show different
+      // things (the heading with the cards, then the words below them), so a shorter step still counts.
+      var near = (mqWide.matches ? 0.1 : 0.3) * V;
       pts = pts.reduce(function (keep, p) {
-        if (p - keep[keep.length - 1] >= 0.3 * V) keep.push(p);
+        if (p - keep[keep.length - 1] >= near) keep.push(p);
         else if (p === end) keep[keep.length - 1] = Math.max(keep[keep.length - 1], p);
         return keep;
       }, [pts[0]]);
