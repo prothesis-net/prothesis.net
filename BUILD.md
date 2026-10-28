@@ -14,7 +14,7 @@ A small static site for Prothesis LLC, published with GitHub Pages from this rep
 | `CNAME` | One line, exactly: `prothesis.net` | **You** |
 | `robots.txt` | Two lines: `User-agent: *` and `Allow: /` | **You** |
 | `favicon.png` (64×64), `apple-touch-icon.png` (180×180) | Site icons | Already made |
-| `assets/img/logo-primary-light.png` | The Linen logo, 2373×335 | Already made |
+| `assets/img/logo-primary-light-tm.png` | The Linen logo with ™, 2483×335 (replaced `logo-primary-light.png`, 2373×335, on 2026-10-28) | Already made |
 | `assets/img/mark-linen.png` | The dove/P mark in Linen, 1071×1240, transparent — the Close chapter only | Already made |
 | `assets/img/og-image.png` | The link-preview image, 1200×630 | Already made |
 | `assets/img/bg-word-desktop.jpg`, `bg-word-mobile.jpg`, `bg-app-desktop.jpg`, `bg-app-mobile.jpg`, `bg-mission-desktop.jpg`, `bg-mission-mobile.jpg` | Pre-blurred painting backgrounds for chapters 4, 5 and 7 (desktop 1920×1200, phone 900×1950) | Already made |

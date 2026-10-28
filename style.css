@@ -93,9 +93,9 @@ h1, .d2, .d3, .q, .sec { text-wrap: balance; }
 .ch-open { padding-bottom: 26vh; }
 .ch-open .inner { display: flex; flex-direction: column; align-items: center; }
 .logo-link { display: block; }
-.logo { display: block; width: 200px; height: auto; }
+.logo { display: block; width: 209px; height: auto; }  /* 200px before the ™ widened the image by 4.6% (2026-10-28) */
 .tagline { color: var(--gold); font-size: 18px; line-height: 1.3; margin-top: 12px; }
-.ch-open .logo { width: clamp(260px, 34vw, 480px); }  /* main d7f22aa: "make the opening logo much bigger" */
+.ch-open .logo { width: clamp(272px, 35.6vw, 502px); }  /* main d7f22aa: "make the opening logo much bigger" */
 .ch-open .tagline { font-size: clamp(18px, 1.8vw, 24px); }
 .top-link { position: absolute; top: 18px; right: 24px; z-index: 2; display: inline-block; padding: 12px 4px; font-size: 14px; letter-spacing: .12em; text-decoration: none; color: var(--linen); }
 .top-link:hover { text-decoration: underline; }
@@ -266,7 +266,7 @@ footer a { color: inherit; }
 
 .band { position: relative; overflow: hidden; background: var(--navy); text-align: center; padding: 72px 24px 150px; }
 .band .inner { display: flex; flex-direction: column; align-items: center; }
-.band .logo { width: 260px; }
+.band .logo { width: 272px; }
 .band .firmament { height: 220px; }
 .band .top-link { color: var(--linen); }
 
@@ -356,7 +356,7 @@ footer a { color: inherit; }
   .art-credit { right: 16px; bottom: 12px; }
 
   .band { padding: 48px 20px 130px; }
-  .band .logo { width: 200px; }
+  .band .logo { width: 209px; }
   .band .firmament { height: 170px; }
   .page { padding: 0 20px 64px; font-size: 17px; }
   .page h1 { font-size: 30px; }
