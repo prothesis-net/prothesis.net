@@ -18,11 +18,12 @@ A small static site for Prothesis LLC, published with GitHub Pages from this rep
 | `assets/img/mark-linen.png` | The dove/P mark in Linen, 1071×1240, transparent — the Close chapter only | Already made |
 | `assets/img/og-image.png` | The link-preview image, 1200×630 | Already made |
 | `assets/img/bg-word-desktop.jpg`, `bg-word-mobile.jpg`, `bg-app-desktop.jpg`, `bg-app-mobile.jpg`, `bg-mission-desktop.jpg`, `bg-mission-mobile.jpg` | Pre-blurred painting backgrounds for chapters 4, 5 and 7 (desktop 1920×1200, phone 900×1950) | Already made |
+| `assets/img/bg-key-presses-desktop.jpg`, `bg-key-presses-mobile.jpg`, `bg-key-hope-desktop.jpg`, `bg-key-hope-mobile.jpg` | The *Key of David* (Yudianto Prabowo; permission 29 Oct 2026), two crops for the "What presses hardest" and "Could there be hope" chapters, blurred to match the river painting (σ 5 desktop / σ 8 phone, about 3.5 px on screen); added 4 Nov 2026 | Already made |
 | `assets/fonts/*.woff2` | The four web fonts | Already made |
 
 Do not create, resize or convert any image. Leave `CONTENT.md`, `BUILD.md`, `README.md` and `assets/` in place. The GitHub Pages source (Settings › Pages) is set by the account owner, not by you.
 
-**Backgrounds:** three chapters carry one of Albert's paintings, two carry temporary colour fields — see "Backgrounds" below. Use only the image files listed here; never add or substitute any other picture.
+**Backgrounds:** chapters carry Albert's paintings, and since 4 Nov 2026 the *Key of David* replaces the temporary colour field it was waiting on — see "Backgrounds" below. Use only the image files listed here; never add or substitute any other picture.
 
 ## Hard rules
 
@@ -172,7 +173,9 @@ Five chapters have more than a flat colour behind them. Give each chapter sectio
 
 Each of these three chapters ends with the credit line from `CONTENT.md` ("Painting: Yudianto Prabowo"): a `<p class="credit">` that is a **direct child of the section, after `.inner`** (never inside it), `position: absolute; left: 0; right: 0; bottom: 18px; z-index: 1; text-align: center; font-size: 13px; letter-spacing: .04em;` in Linen (chapters 4 and 7) or Sea Cow (chapter 5). It is not part of the reveal motion.
 
-**Chapters 2 and 3 — TEMPORARY abstract colour fields.** Two other paintings (the *Key of David* and *Feast of Harvest, Psalm 81*) are waiting for the artist's written permission. Until then these chapters use the paintings' colours only, as soft fields — **no image file, no painting, no credit line**. Use this CSS exactly:
+**Update 4 Nov 2026 — the Key of David is in.** Yudianto Prabowo gave written permission on 29 Oct 2026 (also for *Ezekiel 47*, *Atonement Sacrifice*, *The Most Holy Place* and *Feast of Harvest, Psalm 81*). The live page now shows it in `.ch-presses` (the outer swirl under a Navy 50 % wash) and `.ch-hope` (the boy reaching for the key, kept clear in the lower part of the screen, with the words above it and a "Painting: Yudianto Prabowo" `art-credit`); the CSS is in `style.css`. The original temporary-field note follows for history.
+
+**Chapters 2 and 3 — TEMPORARY abstract colour fields (superseded).** Two other paintings (the *Key of David* and *Feast of Harvest, Psalm 81*) are waiting for the artist's written permission. Until then these chapters use the paintings' colours only, as soft fields — **no image file, no painting, no credit line**. Use this CSS exactly:
 
 ```css
 .ch-question, .ch-calling { position: relative; overflow: hidden; }

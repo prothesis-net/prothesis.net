@@ -76,6 +76,20 @@ h1, .d2, .d3, .q, .sec { text-wrap: balance; }
   radial-gradient(55% 28% at 85% 8%, #0D2331 0%, rgba(13,35,49,0) 75%); }
 .ground-key::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(16,27,35,.45), rgba(16,27,35,.62) 40%, rgba(16,27,35,.8)); }
 
+/* The Key of David itself (Yudianto Prabowo; permission 29 Oct 2026), one crop per chapter over the field above.
+   "What presses hardest": the swirl pressing in, darkened. "Could there be hope": the boy reaching for the key in
+   the light, kept clear in the lower part of the screen; the words sit above it, over the darker swirl. */
+.ch-presses { background: #101B23 url(/assets/img/bg-key-presses-desktop.jpg) center / cover no-repeat; }
+.ch-presses::before { content: ""; position: absolute; inset: 0; background: rgba(16,27,35,.5); }
+.ch-hope { background: #101B23 url(/assets/img/bg-key-hope-desktop.jpg) center 60% / cover no-repeat; align-items: flex-start; }
+.ch-hope::before { content: ""; position: absolute; inset: 0; background:
+  linear-gradient(180deg, rgba(16,27,35,.82) 0%, rgba(16,27,35,.62) 38%, rgba(16,27,35,.08) 58%, rgba(16,27,35,0) 80%, rgba(16,27,35,.35) 100%); }
+@media (max-aspect-ratio: 4/5) {
+  .ch-presses { background-image: url(/assets/img/bg-key-presses-mobile.jpg); }
+  .ch-hope { background-image: url(/assets/img/bg-key-hope-mobile.jpg); background-position: center 58%; }
+}
+.ch-hope .art-credit { z-index: 2; }
+
 /* Ground 2: the river painting (Ezekiel 47) under "Where rest comes in" and "Morning shift". */
 .ground-river { position: relative; background: #3A5267 url(/assets/img/bg-word-desktop.jpg) center / cover no-repeat; }
 @media (max-aspect-ratio: 4/5) { .ground-river { background-image: url(/assets/img/bg-word-mobile.jpg); } }
