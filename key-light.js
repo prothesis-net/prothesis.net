@@ -4,7 +4,7 @@
    same painting until the boy with his hand out is in view, the painting's own light now round his hand. Progress p runs 0 → 1 from the last rest of "What presses hardest" to
    "Could there be hope" at rest. The words keep the page's quick glide (scroll-settle.js), but the painting follows
    more slowly, on desktop and phones alike, easing after
-   the scroll and settling about two and a half seconds later (Albert, 5 Nov 2026: the artwork should change slowly).
+   the scroll and settling about one and a half seconds after it begins (Albert, 5 Nov 2026: the artwork should change slowly).
    All places are in the original painting's pixels (3728 × 5363). Each device has one tall blurred copy of part of it
    (bg-key-run-*.jpg) and two framings: "What presses hardest" (the old still crop) and "Could there be hope". */
 (function () {
@@ -14,8 +14,8 @@
   var presses = run.querySelector('.ch-presses'), hope = run.querySelector('.ch-hope');
   var mqPhone = window.matchMedia('(max-aspect-ratio: 4/5)');
   var mqRM = window.matchMedia('(prefers-reduced-motion: reduce)');
-  var W0 = 2.3;   // the painting follows like a soft spring (no overshoot): slow to start, half way by ~1 s,
-                  // settled by ~2.5 s, so it never rushes with the quick glide of the words
+  var W0 = 4.0;   // the painting follows like a soft spring (no overshoot): slow to start, settled by ~1.5 s,
+                  // so it never rushes with the quick glide of the words (Albert, 5 Nov 2026: 1.5 s)
 
   // img: the part of the painting in the file [x, y, w, h]; px: the file's width in pixels.
   // from / to: the two framings [x, y, w, h, where extra height is cropped (0 top … 1 bottom)].
