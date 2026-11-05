@@ -76,9 +76,16 @@ h1, .d2, .d3, .q, .sec { text-wrap: balance; }
   radial-gradient(55% 28% at 85% 8%, #0D2331 0%, rgba(13,35,49,0) 75%); }
 .ground-key::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(16,27,35,.45), rgba(16,27,35,.62) 40%, rgba(16,27,35,.8)); }
 
-/* The Key of David itself (Yudianto Prabowo; permission 29 Oct 2026), one crop per chapter over the field above.
-   "What presses hardest": the swirl pressing in, darkened. "Could there be hope": the boy reaching for the key in
-   the light, kept clear in the lower part of the screen; the words sit above it, over the darker swirl. */
+/* The Key of David (Yudianto Prabowo; permission 29 Oct 2026): ONE painting held behind "What presses hardest" and
+   "Could there be hope", never shown twice. "What presses hardest" rests on the upper swirl with the painting's light
+   glowing at the bottom of the screen. Scrolling on, the view moves down the same painting until the boy with his hand
+   out is in view. key-light.js places the painting (one tall blurred copy per device) for each scroll position.
+   Without JavaScript the old still crops show instead. */
+.ground-key { overflow: clip; }   /* clip, not hidden: hidden would stop the painting from staying in place */
+.key-run { position: relative; }
+.key-stage { position: sticky; top: 0; height: 100vh; margin-bottom: -100vh; overflow: hidden; background: #101B23; z-index: 0; }
+.key-canvas, .key-wash, .key-hopewash { display: none; }
+.key-run .ch { z-index: 1; }
 .ch-presses { background: #101B23 url(/assets/img/bg-key-presses-desktop.jpg) center / cover no-repeat; }
 .ch-presses::before { content: ""; position: absolute; inset: 0; background: rgba(16,27,35,.5); }
 .ch-hope { background: #101B23 url(/assets/img/bg-key-hope-desktop.jpg) center 60% / cover no-repeat; align-items: flex-start; }
@@ -90,6 +97,15 @@ h1, .d2, .d3, .q, .sec { text-wrap: balance; }
 }
 .ch-hope .art-credit { z-index: 2; }
 
+.key-run.is-lit .ch { background: transparent; }
+.key-run.is-lit .ch::before { display: none; }
+.key-run.is-lit .key-canvas { display: block; position: absolute; left: 0; top: 0; transform-origin: 0 0; will-change: transform;
+  background: url(/assets/img/bg-key-run-desktop.jpg) 0 0 / 100% 100% no-repeat; }
+@media (max-aspect-ratio: 4/5) { .key-run.is-lit .key-canvas { background-image: url(/assets/img/bg-key-run-mobile.jpg); } }
+/* The darkening behind each chapter's words, held in the screen and crossfaded, so no edge travels up the painting. */
+.key-run.is-lit .key-wash { display: block; position: absolute; inset: 0; background: rgba(16,27,35,.5); opacity: calc(1 - var(--p, 0)); }
+.key-run.is-lit .key-hopewash { display: block; position: absolute; inset: 0; opacity: var(--p, 0); background:
+  linear-gradient(180deg, rgba(16,27,35,.82) 0%, rgba(16,27,35,.62) 38%, rgba(16,27,35,.08) 58%, rgba(16,27,35,0) 80%, rgba(16,27,35,.35) 100%); }
 /* Ground 2: the river painting (Ezekiel 47) under "Where rest comes in" and "Morning shift". */
 .ground-river { position: relative; background: #3A5267 url(/assets/img/bg-word-desktop.jpg) center / cover no-repeat; }
 @media (max-aspect-ratio: 4/5) { .ground-river { background-image: url(/assets/img/bg-word-mobile.jpg); } }
