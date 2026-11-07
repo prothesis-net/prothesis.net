@@ -93,7 +93,7 @@ Painting: Yudianto Prabowo
 
 ## 5 · Our first app — Navy
 
-KICKER: Our first app — coming soon
+KICKER: Our first app: Dove’s Path — coming soon (heading ruled by Albert 2026-11-07)
 
 Hearing God by reflecting on His Word, & holding on to what He speaks to you, in your life & in your work.
 

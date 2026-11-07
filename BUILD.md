@@ -33,7 +33,7 @@ Do not create, resize or convert any image. Leave `CONTENT.md`, `BUILD.md`, `REA
 - **Text exactly as in `CONTENT.md`.** Keep its curly quotes, apostrophes, en and em dashes, and every "&". Never render anything inside `[NOTE: …]` or any `##` label. `KICKER:` is a label word, not text — render only what follows it.
 - **"&" never ends a line.** In page text write each one as `&amp;&nbsp;` joined to the next word. Inside attributes (`content="…"`, `aria-label`) write `&amp;` followed by a plain space.
 - **Root-absolute paths everywhere** (`/style.css`, `/assets/…`, `/favicon.png`), so `404.html` works at any address.
-- **No product or app name** anywhere; the app is only "our first app" / "this phone app".
+- **The app is named once, in the Chapter 5 heading: "Our first app: Dove’s Path"** (Albert, 2026-11-07, after the trademark filing, SN 50187116). Written with the typographic apostrophe; never "PATH" or "Path" alone. Elsewhere it stays "our first app" / "this phone app".
 - Every page has `lang="en"`, `<meta charset="utf-8">`, `<meta name="viewport" content="width=device-width, initial-scale=1">`, its `<title>` from `CONTENT.md` (the meta description is on the home page only — the privacy and 404 pages have none), `<link rel="icon" href="/favicon.png">` and `<link rel="apple-touch-icon" href="/apple-touch-icon.png">`.
 - Home page Open Graph tags: `og:title` "Prothesis", `og:description` = the meta description, `og:image` `https://prothesis.net/assets/img/og-image.png`, `og:url` `https://prothesis.net/`, `og:type` "website".
 
