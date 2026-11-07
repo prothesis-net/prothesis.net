@@ -1,0 +1,10 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["BTJ6YBF4NJ.net.prothesis.dovespath", "BTJ6YBF4NJ.net.prothesis.dovespath.test"],
+        "components": [{ "/": "/signin", "comment": "the sign-in email's button" }]
+      }
+    ]
+  }
+}

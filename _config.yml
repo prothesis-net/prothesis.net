@@ -1,1 +1,2 @@
 exclude: [BUILD.md, CONTENT.md, README.md]
+include: [".well-known"]
