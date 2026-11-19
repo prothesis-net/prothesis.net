@@ -97,7 +97,7 @@ KICKER: Our first app: Dove’s Path — coming soon (heading ruled by Albert 20
 
 Hearing God by reflecting on His Word, & holding on to what He speaks to you, in your life & in your work.
 
-Leave your email & we’ll invite you to the beta when a place opens.
+Leave your email & we’ll invite you to the iPhone beta when a place opens.
 
 Sign up for the beta
 
@@ -105,9 +105,11 @@ Sign up for the beta
 
 [NOTE: "Sign up for the beta" is the button of the waitlist form (2026-10-23): an email field (placeholder "you@example.com", read aloud as "Email address") beside the button, on phones above it. It posts to the waitlist Worker; see BUILD.md. After sending, the form is replaced by "Thank you. Please check your inbox and confirm your email." Messages if something is wrong: "That doesn’t look like an email address. Please check it." / "Too many tries just now. Please wait a few minutes and try again." / "Something went wrong. Please try again, or write to contact@prothesis.net." No product or app name anywhere — it is held until the trademark is settled.]
 
-*We’ll only write to you about this phone app. Unsubscribe any time. For ages 13 and up.* – Privacy
+*The beta is for iPhone only. Android will come later. We’ll only write to you about this phone app. Unsubscribe any time. For ages 13 and up.* – Privacy
 
 [NOTE: "For ages 13 and up." added 2026-11-19 (Albert: "yes put in small print").]
+
+[NOTE: "iPhone" in the ask line and "The beta is for iPhone only. Android will come later." in the small print added 2026-11-19. Albert: the beta sign-up is for iOS, App Store only; "Just say Android coming soon or later." He chose this wording (option A). "Later", not "soon": under the quiet launch (D84) the page promises no date.]
 
 [NOTE: One line of small print under the button. "Privacy" links to `/privacy`.]
 
