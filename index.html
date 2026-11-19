@@ -200,15 +200,22 @@
     <p class="drawn r">Nothing is counted. What you hear is kept.</p>
     <p class="drawn r s1">No one is keeping score. He is keeping you.</p>
     <p class="drawn r s2">Come when you are drawn, not when you are due.</p>
-    <p class="lead ask r s3">Leave your email &amp;&nbsp;we’ll invite you to the iPhone beta when a place opens.</p>
+    <p class="lead ask r s3">Leave your email &amp;&nbsp;we’ll invite you to the beta when a place opens.</p>
     <form class="join r s4" action="https://prothesis-waitlist.prothesis.workers.dev/subscribe" method="post">
+      <fieldset class="join-phone">
+        <legend>Which phone do you use?</legend>
+        <label><input type="radio" name="phone" value="iphone" required> <span>iPhone — join the beta</span></label>
+        <label><input type="radio" name="phone" value="android"> <span>Android — coming later</span></label>
+      </fieldset>
+      <div class="join-row">
       <label class="vh" for="join-email">Email address</label>
       <input class="join-email" id="join-email" name="email" type="email" required autocomplete="email" inputmode="email" spellcheck="false" maxlength="254" placeholder="you@example.com">
       <span class="join-trap" aria-hidden="true"><label>Leave empty <input name="website" tabindex="-1" autocomplete="off"></label></span>
       <button class="btn" type="submit">Sign up for the beta</button>
+      </div>
     </form>
     <p class="join-msg" role="status" aria-live="polite"></p>
-    <p class="fine r s4">The beta is for iPhone only. Android will come later. We’ll only write to you about this phone app. Unsubscribe any time. For ages 13 and up. – <a href="/privacy">Privacy</a></p>
+    <p class="fine r s4">We’ll only write to you about this phone app. Unsubscribe any time. For ages 13 and up. – <a href="/privacy">Privacy</a></p>
   </div>
 </section>
 

@@ -6,13 +6,14 @@
   var t0 = Date.now(), msg = document.querySelector('.join-msg'), button = form.querySelector('button');
   var SAY = {   // DRAFT
     email: 'That doesn’t look like an email address. Please check it.',
+    phone: 'Please choose iPhone or Android.',
     busy: 'Too many tries just now. Please wait a few minutes and try again.',
     other: 'Something went wrong. Please try again, or write to contact@prothesis.net.',
     thanks: 'Thank you. Please check your inbox and confirm your email.',
   };
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    var data = { email: form.email.value, website: form.website.value, t: Date.now() - t0 };
+    var data = { email: form.email.value, phone: form.phone.value, website: form.website.value, t: Date.now() - t0 };
     msg.textContent = ''; msg.classList.remove('is-error'); button.disabled = true;
     fetch(form.action, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(data) })
       .then(function (r) { return r.json().catch(function () { return { ok: false }; }); })
@@ -29,6 +30,7 @@
         button.disabled = false; msg.classList.add('is-error');
         msg.textContent = SAY[err.message] || SAY.other;
         if (err.message === 'email') form.email.focus();
+        if (err.message === 'phone') form.querySelector('input[name=phone]').focus();
       });
   });
 })();

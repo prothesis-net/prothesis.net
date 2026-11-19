@@ -97,7 +97,11 @@ KICKER: Our first app: Dove’s Path — coming soon (heading ruled by Albert 20
 
 Hearing God by reflecting on His Word, & holding on to what He speaks to you, in your life & in your work.
 
-Leave your email & we’ll invite you to the iPhone beta when a place opens.
+Leave your email & we’ll invite you to the beta when a place opens.
+
+Which phone do you use?
+( ) iPhone — join the beta
+( ) Android — coming later
 
 Sign up for the beta
 
@@ -105,11 +109,13 @@ Sign up for the beta
 
 [NOTE: "Sign up for the beta" is the button of the waitlist form (2026-10-23): an email field (placeholder "you@example.com", read aloud as "Email address") beside the button, on phones above it. It posts to the waitlist Worker; see BUILD.md. After sending, the form is replaced by "Thank you. Please check your inbox and confirm your email." Messages if something is wrong: "That doesn’t look like an email address. Please check it." / "Too many tries just now. Please wait a few minutes and try again." / "Something went wrong. Please try again, or write to contact@prothesis.net." No product or app name anywhere — it is held until the trademark is settled.]
 
-*The beta is for iPhone only. Android will come later. We’ll only write to you about this phone app. Unsubscribe any time. For ages 13 and up.* – Privacy
+*We’ll only write to you about this phone app. Unsubscribe any time. For ages 13 and up.* – Privacy
 
 [NOTE: "For ages 13 and up." added 2026-11-19 (Albert: "yes put in small print").]
 
 [NOTE: "iPhone" in the ask line and "The beta is for iPhone only. Android will come later." in the small print added 2026-11-19. Albert: the beta sign-up is for iOS, App Store only; "Just say Android coming soon or later." He chose this wording (option A). "Later", not "soon": under the quiet launch (D84) the page promises no date.]
+
+[NOTE: Same day, replaced by a required phone choice above the email field (Albert: two round "places where you can click … iOS with the notice that it's coming with the beta, and then Android, it's the notice that it will be coming later", "Required, yes iPhone & android"). The two choices carry the iPhone-only and Android-later message, so "iPhone" left the ask line and the iPhone sentence left the small print. Legend "Which phone do you use?"; choices "iPhone — join the beta" / "Android — coming later" (Claude's draft, waiting for his approval). Without a choice the browser asks for one; the Worker also refuses it ("Please choose iPhone or Android."). The Worker stores the choice; after confirming, Android sign-ups read "Thank you. You’re on the list. We’ll write when our first app comes to Android." Privacy "What we collect", "Why" and "Where it is kept" changed to match.]
 
 [NOTE: One line of small print under the button. "Privacy" links to `/privacy`.]
 
@@ -197,11 +203,11 @@ Prothesis LLC – Greater Chicago area, Illinois – contact@prothesis.net – �
 
 **Who we are.** This website belongs to Prothesis LLC, based in the greater Chicago area, Illinois. You can reach us at contact@prothesis.net.
 
-**What we collect.** This website does not use cookies, analytics or trackers. If you sign up for our beta, we collect the email address you give us.
+**What we collect.** This website does not use cookies, analytics or trackers. If you sign up for our beta, we collect the email address you give us and which phone you use (iPhone or Android).
 
-**Why.** We use your email only to invite you to the beta of our app, to tell you when it is ready and to send occasional news about it. We do not sell, rent or share your email with anyone else.
+**Why.** We use your email only to invite you to the beta of our app, to tell you when it is ready and to send occasional news about it. We ask which phone you use so that we invite only iPhone users to the beta, and write to Android users when the app comes to Android. We do not sell, rent or share your email with anyone else.
 
-**Where it is kept.** Sign-ups are stored with Cloudflare, which runs the sign-up for us, and the emails we send come from our Microsoft account. We keep your email address, when you signed up and when you confirmed. To stop abuse, we briefly keep a scrambled form of your internet address, deleted within the hour.
+**Where it is kept.** Sign-ups are stored with Cloudflare, which runs the sign-up for us, and the emails we send come from our Microsoft account. We keep your email address, which phone you use, when you signed up and when you confirmed. To stop abuse, we briefly keep a scrambled form of your internet address, deleted within the hour.
 
 **Your choices.** You can ask us to remove your email at any time by writing to contact@prothesis.net, and every email we send will include a way to unsubscribe.
 

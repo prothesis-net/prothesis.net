@@ -265,7 +265,18 @@ html:not(.js) .card .flow img { display: block; width: 100%; height: auto; borde
 /* The waitlist form (chapter 10): square corners like the button, the field outlined in Linen on Navy, the button
    Pure Gold. It posts to the waitlist Worker; waitlist.js answers in place, and without JavaScript the Worker answers
    with its own page. Phones: the field above the button, both full width. */
-.join { display: flex; justify-content: center; max-width: 600px; margin: 40px auto 18px; }
+.join { max-width: 600px; margin: 40px auto 18px; }
+.join-row { display: flex; justify-content: center; }
+/* The phone choice above the field: two round choices, Linen on Navy, the chosen one filled in Pure Gold. */
+.join-phone { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 32px; margin: 0 0 22px; padding: 0; border: 0; }
+.join-phone legend { width: 100%; margin-bottom: 12px; padding: 0; text-align: center; font-size: 18px; line-height: 1.45; color: var(--linen); }
+.join-phone label { display: inline-flex; align-items: center; gap: 12px; min-height: 48px; cursor: pointer; font-size: clamp(18px, 1.6vw, 22px); line-height: 1.2; color: var(--linen); }
+.join-phone input {
+  appearance: none; -webkit-appearance: none; flex: none; width: 24px; height: 24px; margin: 0;
+  border: 1.5px solid var(--linen); border-radius: 50%; background: transparent; cursor: pointer;
+}
+.join-phone input:checked { border-color: var(--gold); background: radial-gradient(circle, var(--gold) 0 6px, transparent 7px); }
+.join-phone input:focus-visible { outline: 3px solid var(--linen); outline-offset: 4px; }
 .join-email {
   flex: 1 1 auto; min-width: 0; min-height: 64px; padding: 0 22px; margin: 0;
   border: 1.5px solid var(--linen); border-right: 0; border-radius: 0; background: transparent; color: var(--linen);
@@ -281,7 +292,8 @@ html:not(.js) .card .flow img { display: block; width: 100%; height: auto; borde
 .join-done { margin: 40px auto 28px; font-size: clamp(20px, 2vw, 28px); line-height: 1.45; color: var(--linen); }
 .join-done::before { content: ""; display: block; width: 64px; height: 2px; background: var(--gold); margin: 0 auto 24px; }
 @media (max-width: 600px) {
-  .join { flex-direction: column; gap: 12px; }
+  .join-row { flex-direction: column; gap: 12px; }
+  .join-phone { flex-direction: column; align-items: flex-start; width: fit-content; margin-left: auto; margin-right: auto; }
   .join-email { border-right: 1.5px solid var(--linen); }
   .join .btn { width: 100%; }
 }
