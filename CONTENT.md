@@ -97,11 +97,13 @@ KICKER: Our first app: Dove’s Path — coming soon (heading ruled by Albert 20
 
 Hearing God by reflecting on His Word, & holding on to what He speaks to you, in your life & in your work.
 
-Leave your email & we’ll let you know when it’s ready.
+Leave your email & we’ll invite you to the beta when a place opens.
 
-Join the waitlist
+Sign up for the beta
 
-[NOTE: "Join the waitlist" is the button of the waitlist form (2026-10-23): an email field (placeholder "you@example.com", read aloud as "Email address") beside the button, on phones above it. It posts to the waitlist Worker; see BUILD.md. After sending, the form is replaced by "Thank you. Please check your inbox and confirm your email." Messages if something is wrong: "That doesn’t look like an email address. Please check it." / "Too many tries just now. Please wait a few minutes and try again." / "Something went wrong. Please try again, or write to contact@prothesis.net." No product or app name anywhere — it is held until the trademark is settled.]
+[NOTE: Changed 2026-11-19 from "…we’ll let you know when it’s ready." / "Join the waitlist": Albert, "yes waitlist be beta sign-up. do that now". The new wording is Claude's draft, waiting for his approval.]
+
+[NOTE: "Sign up for the beta" is the button of the waitlist form (2026-10-23): an email field (placeholder "you@example.com", read aloud as "Email address") beside the button, on phones above it. It posts to the waitlist Worker; see BUILD.md. After sending, the form is replaced by "Thank you. Please check your inbox and confirm your email." Messages if something is wrong: "That doesn’t look like an email address. Please check it." / "Too many tries just now. Please wait a few minutes and try again." / "Something went wrong. Please try again, or write to contact@prothesis.net." No product or app name anywhere — it is held until the trademark is settled.]
 
 *We’ll only write to you about this phone app. Unsubscribe any time.* – Privacy
 
@@ -187,15 +189,15 @@ Prothesis LLC – Greater Chicago area, Illinois – contact@prothesis.net – �
 
 # Privacy
 
-*Last updated: 23 October 2026*
+*Last updated: 19 November 2026*
 
 **Who we are.** This website belongs to Prothesis LLC, based in the greater Chicago area, Illinois. You can reach us at contact@prothesis.net.
 
-**What we collect.** This website does not use cookies, analytics or trackers. If you join our waitlist, we collect the email address you give us.
+**What we collect.** This website does not use cookies, analytics or trackers. If you sign up for our beta, we collect the email address you give us.
 
-**Why.** We use your email only to tell you when our app is ready and to send occasional news about it. We do not sell, rent or share your email with anyone else.
+**Why.** We use your email only to invite you to the beta of our app, to tell you when it is ready and to send occasional news about it. We do not sell, rent or share your email with anyone else.
 
-**Where it is kept.** Waitlist sign-ups are stored with Cloudflare, which runs the sign-up for us, and the emails we send come from our Microsoft account. We keep your email address, when you signed up and when you confirmed. To stop abuse, we briefly keep a scrambled form of your internet address, deleted within the hour.
+**Where it is kept.** Sign-ups are stored with Cloudflare, which runs the sign-up for us, and the emails we send come from our Microsoft account. We keep your email address, when you signed up and when you confirmed. To stop abuse, we briefly keep a scrambled form of your internet address, deleted within the hour.
 
 **Your choices.** You can ask us to remove your email at any time by writing to contact@prothesis.net, and every email we send will include a way to unsubscribe.
 

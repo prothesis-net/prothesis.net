@@ -232,7 +232,7 @@ Only `opacity` and `transform` animate. Nothing else moves except the glint. Und
 3. **Contrast for every reader** — every text pair in the Colours table is ≥ 4.5:1.
 4. **Colour carries the chapters; gold is the accent** — the tagline, the arc, the question, kickers, rules, ladder numbers, the button, the closing line. Gold never fills a large area except the one button.
 5. **Calm motion** — lines rise once as they arrive; the glint is the only continuous motion; no carousels, pop-ups, parallax or stock imagery.
-6. **Clarity, then motivation, then one next step** — who this is, why it matters, then one ask: join the waitlist.
+6. **Clarity, then motivation, then one next step** — who this is, why it matters, then one ask: sign up for the beta.
 
 ## Check before finishing
 
@@ -241,7 +241,7 @@ Only `opacity` and `transform` animate. Nothing else moves except the glint. Und
 - Every font file and image loads (no 404s); no request leaves the domain.
 - No text in `#9A734D`; every text colour matches the Colours table.
 - Search the built HTML: "Consulting", "lorem", "NOTE", "KICKER", "{LOGO}" — none present. No "&" is followed by a plain space (each is `&amp;&nbsp;`).
-- The waitlist form's `action` is exactly `https://prothesis-waitlist.prothesis.workers.dev/subscribe`, `method="post"`, with the email field, the hidden `website` field and the "Join the waitlist" button.
+- The waitlist form's `action` is exactly `https://prothesis-waitlist.prothesis.workers.dev/subscribe`, `method="post"`, with the email field, the hidden `website` field and the "Sign up for the beta" button.
 - The footer reads exactly: `Prothesis LLC – Greater Chicago area, Illinois – contact@prothesis.net – © 2026 Prothesis LLC – Privacy`.
 - No image beyond the logo, the mark, the icons, the OG image and the six `bg-*.jpg` backgrounds. Chapters 2 and 3 load no image at all.
 - The tagline under the logo (home, privacy and 404 pages) has **no** closing period; chapter 4's headline "Translation ignites purpose." **keeps** its period. Search the HTML for "ignites purpose." — exactly one match, in chapter 4.
