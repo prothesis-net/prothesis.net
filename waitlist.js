@@ -9,7 +9,8 @@
     phone: 'Please choose iPhone or Android.',
     busy: 'Too many tries just now. Please wait a few minutes and try again.',
     other: 'Something went wrong. Please try again, or write to contact@prothesis.net.',
-    thanks: 'Thank you. Please check your inbox and confirm your email.',
+    thanks: 'Thank you. You’re on the list. We’ll write when a place opens in the beta of our first app.',
+    thanksAndroid: 'Thank you. You’re on the list. We’ll write when our first app comes to Android.',
   };
   form.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -20,7 +21,7 @@
       .then(function (r) {
         if (r.ok) {
           var done = document.createElement('p');
-          done.className = 'join-done'; done.setAttribute('role', 'status'); done.tabIndex = -1; done.textContent = SAY.thanks;
+          done.className = 'join-done'; done.setAttribute('role', 'status'); done.tabIndex = -1; done.textContent = data.phone === 'android' ? SAY.thanksAndroid : SAY.thanks;
           form.replaceWith(done); msg.remove(); done.focus();
           return;
         }
