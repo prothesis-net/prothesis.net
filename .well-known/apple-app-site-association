@@ -2,7 +2,7 @@
   "applinks": {
     "details": [
       {
-        "appIDs": ["BTJ6YBF4NJ.net.prothesis.dovespath", "BTJ6YBF4NJ.net.prothesis.dovespath.test"],
+        "appIDs": ["BTJ6YBF4NJ.net.prothesis.dovespath", "BTJ6YBF4NJ.net.prothesis.dovespath.test", "BTJ6YBF4NJ.net.prothesis.dovespath.app"],
         "components": [{ "/": "/signin", "comment": "the sign-in email's button" }]
       }
     ]
