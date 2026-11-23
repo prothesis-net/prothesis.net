@@ -238,8 +238,12 @@
     var w = words(card);
     obody.querySelector('.card-kicker').textContent = w.k;
     obody.querySelector('.card-head').innerHTML = w.h;
-    row.style.setProperty('--phh', Math.round(Math.min(620, pinH - ptop - 170)) + 'px');
     obody.hidden = false;
+    // The phone fills the open panel's height: from just under the heading to a little above the panel's bottom
+    // (Albert, 2026-11-23: the open preview was too bare). Width follows the phone's own shape.
+    var ophone = obody.querySelector('.ophone');
+    var phoneTop = ophone.offsetTop + 7;                 // the heading and its gap above, plus the phone's frame
+    row.style.setProperty('--phh', Math.round(Math.max(300, Math.min(1240, pinH - ptop - phoneTop - 7 - 28))) + 'px');
     var imgs = fillScreens(oscreen, shots);
     cards.forEach(function (c) { c.classList.toggle('is-open-face', c === card); });
     open = { card: card, mode: 'stage', imgs: imgs, n: n, L: L };
