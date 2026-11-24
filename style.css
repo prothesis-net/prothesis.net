@@ -130,7 +130,7 @@ h1, .d2, .d3, .q, .sec { text-wrap: balance; }
 .top-link { position: absolute; top: 18px; right: 24px; z-index: 2; display: inline-block; padding: 12px 4px; font-size: 14px; letter-spacing: .12em; text-decoration: none; color: var(--linen); }
 .top-link:hover { text-decoration: underline; }
 .top-nav { position: absolute; top: 18px; right: 24px; z-index: 2; display: flex; align-items: center; gap: 22px; }
-.top-nav .top-link { position: static; }
+.top-nav .top-link { position: static; font-size: 17px; }
 .top-dp { display: inline-flex; align-items: center; }
 .top-dp img { display: block; height: 15px; width: auto; opacity: .92; transition: opacity .2s ease; }
 .top-dp:hover img, .top-dp:focus-visible img { opacity: 1; }
@@ -411,6 +411,7 @@ footer a { color: inherit; }
   .top-link { right: 16px; top: 10px; }
   .top-nav { right: 16px; top: 10px; gap: 16px; }
   .top-dp img { height: 13px; }
+  .top-nav .top-link { font-size: 14.5px; }
   .fine a, footer a { display: inline-block; padding: 10px 4px; margin: -10px -4px; }
   .art-credit { right: 16px; bottom: 12px; }
 
