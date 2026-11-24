@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dove’s Path – Prothesis</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/style.css">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+/* Arc transition to the Dove's Path page (mockup 2026-11-24, not approved): the gold arc carries you across. */
+@view-transition { navigation: auto; }
+::view-transition-group(dp-arc) { animation-duration: 1s; animation-timing-function: cubic-bezier(.2,.6,.2,1); }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: .8s; }
+@media (prefers-reduced-motion: reduce) { ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; } }
+/* The horizon: navy sky above the gold arc, the linen page rising under it. */
+.dp .band { background: linear-gradient(var(--navy), var(--navy)) top / 100% calc(100% - 219px) no-repeat; padding-bottom: 176px; }
+.dp .band .dp-sky, .dp .band .firmament { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 220px; min-height: 0; pointer-events: none; }
+.dp .band .dp-sky { z-index: 0; }
+.dp .band .firmament { z-index: 1; view-transition-name: dp-arc; }
+.dp .band .inner { position: relative; z-index: 2; }
+.dp .glint { transform-origin: 800px 3350px; animation: dp-glint 22s linear -7s infinite; }
+@keyframes dp-glint { from { transform: rotate(-11deg); } to { transform: rotate(11deg); } }
+@media (prefers-reduced-motion: reduce) { .dp .glint { animation: none; transform: rotate(-3deg); } }
+.dp .page { margin-top: 8px; }
+/* MOCKUP 2026-11-24, not approved: inline so style.css stays untouched */
+.dp .page{max-width:1040px}
+.dp .dp-top{text-align:center;max-width:680px;margin:0 auto}
+.dp h1{font-size:44px;margin-bottom:16px}
+.dp .lede{font-size:21px}
+.dp .story-link .chev{color:#a98a2f;display:inline-block;position:relative;top:-.06em;margin:0 .1em;transition:transform .4s ease}
+.dp .story-link:hover .chev{transform:translateX(-5px)}
+.dp .story-link{display:inline-block;margin-top:34px;font-size:clamp(20px,2.4vw,28px);font-weight:700;color:var(--slate);text-decoration:none}
+.dp .story-link:hover{color:#a98a2f}
+.dp .intro{max-width:680px;margin:72px auto 0;text-align:center}
+.dp .intro h2,.dp .keeps h2,.dp .beta h2{font-size:26px;margin-bottom:16px}
+.dp .row{display:grid;grid-template-columns:1fr 260px;gap:56px;align-items:center;margin:88px auto 0;max-width:820px}
+.dp .row:nth-of-type(even){grid-template-columns:260px 1fr}
+.dp .row:nth-of-type(even) .txt{order:2}
+.dp .kick{font-size:15px;letter-spacing:.12em;text-transform:uppercase;color:var(--goat-d);margin-bottom:8px}
+.dp .row h3{font-size:28px;line-height:1.2;margin-bottom:14px}
+.dp .dp-wordmark{display:flex;justify-content:center;align-items:flex-start;margin-bottom:77px}
+.dp .dp-wordmark img{display:block;width:min(440px,80vw);height:auto;margin:0}
+.dp .dp-wordmark .tm{font-size:clamp(14px,1.6vw,20px);font-weight:400;color:var(--slate);line-height:1;margin:2px 0 0 4px}
+/* The icon and wordmark sit centred between the arc's crest and the first line. */
+.dp .dp-ch1 main{position:relative;z-index:3;margin-top:-43px}
+.dp .dp-icon{width:210px;height:210px;border-radius:47px;box-shadow:0 14px 34px rgba(16,27,35,.28);margin:0 auto 22px;display:block}
+.dp h1{font-size:clamp(44px,6vw,68px);margin-bottom:26px}
+.dp .dp-lines{font-size:clamp(24px,3.2vw,38px);line-height:1.25;font-weight:700}
+.dp .dp-lines span{display:block}
+.dp .dp-lines span+span{margin-top:6px}
+.dp .dp-lines em{font-style:normal;font-weight:700;color:inherit}
+.dp .dp-lines span:last-child{font-weight:400;color:var(--navy);font-size:.78em;margin-top:14px}
+.dp .dp-top{max-width:860px;padding-bottom:72px}
+.dp .dp-practice{margin-top:0;padding:16vh 24px 14vh;text-align:center;color:var(--linen)}
+.dp .dp-practice-in{position:relative;max-width:900px;margin:0 auto}
+.dp .dp-practice .kick{color:var(--linen);margin-bottom:30px;font-size:clamp(18px,2vw,26px);letter-spacing:.1em}
+.dp .dp-big{font-size:clamp(30px,4.6vw,56px);line-height:1.15;font-weight:700;text-wrap:balance}
+.dp .dp-gold{color:var(--gold);margin-top:10px}
+.dp .dp-credit{position:absolute;right:20px;bottom:14px;font-size:13px;opacity:.85}
+.dp .dp-practice-in{position:static}
+.dp .keeps{text-align:center}
+.dp .dp-cards{padding-top:72px}
+.dp .dp-ch1{min-height:100vh;min-height:100svh}
+.dp .dp-practice{min-height:100vh;min-height:100svh;display:flex;align-items:center;justify-content:center}
+.dp .dp-cards{min-height:100vh;min-height:100svh}
+.dp .dp-ch4{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:center}
+@media (min-width:1024px){.dp .dp-horizon.is-lifting path:nth-of-type(3),.dp .dp-horizon.is-lifting .glint{visibility:hidden}}
+.dp .card-btn:focus{outline:none}
+.dp .card-btn:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.dp .dp-cards{background:transparent;padding:24px 0 0}
+.dp .dp-rest{margin-top:0}
+.dp .phone img{display:block;width:100%;height:auto}
+.dp .keeps,.dp .beta{max-width:680px;margin:104px auto 0}
+.dp .small{font-size:15px;color:var(--slate);margin-top:14px}
+.dp .mock-form{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.dp .mock-form input{flex:1;min-width:220px;font:inherit;padding:12px 14px;border:1px solid #b9b2a3;border-radius:6px;background:#fff}
+.dp .mock-form button{font:inherit;font-weight:700;padding:12px 20px;border:0;border-radius:6px;background:var(--navy);color:var(--linen)}
+.dp .beta{background:var(--navy);color:var(--linen);padding:44px 32px 44px;border-radius:14px;text-align:center;max-width:760px}
+.dp .beta h2{color:var(--gold);font-size:clamp(32px,4vw,44px);line-height:1.1;margin:0 0 18px}
+.dp.about .page .beta h2{margin-top:0}
+.dp .beta .join{margin-bottom:0}
+.dp .beta .small{margin-bottom:0}
+.dp .beta .small{color:var(--sea)}
+.dp .held{margin:96px auto 0;max-width:680px;padding:18px 20px;border:2px dashed #b08a34;border-radius:8px;font-size:16px;color:var(--earth)}
+.dp .mockflag{position:fixed;top:10px;right:10px;z-index:9;background:#b08a34;color:#fff;font:700 13px/1 system-ui;padding:6px 10px;border-radius:4px}
+@media(max-width:720px){.dp .row,.dp .row:nth-of-type(even){grid-template-columns:1fr;gap:28px}.dp .row:nth-of-type(even) .txt{order:0}.dp .phone{max-width:240px;margin:0 auto}}
+</style>
+</head>
+<body class="about dp">
+<div class="dp-ch dp-ch1" data-settle="Dove’s Path">
+<header class="band">
+  <div class="inner">
+    <a class="logo-link" href="/"><img class="logo" src="/assets/img/logo-primary-light-tm.png" alt="Prothesis" width="2483" height="335"></a>
+    <p class="tagline">Translation ignites purpose</p>
+  </div>
+  <svg class="dp-sky" viewBox="0 0 1600 220" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false">
+    <path d="M 0 0 H 1600 V 200 A 3250 3250 0 0 0 0 200 Z" fill="#101B23"/>
+  </svg>
+  <svg class="firmament dp-horizon" data-horizon data-r="3250" data-cy="3350" viewBox="0 0 1600 220" preserveAspectRatio="xMidYMax slice" aria-hidden="true" focusable="false">
+    <defs>
+      <filter id="fg-halo" x="-10%" y="-200%" width="120%" height="500%"><feGaussianBlur stdDeviation="9"/></filter>
+      <filter id="fg-glow" x="-10%" y="-200%" width="120%" height="500%"><feGaussianBlur stdDeviation="2.2"/></filter>
+      <linearGradient id="fg-glint" gradientUnits="userSpaceOnUse" x1="700" y1="0" x2="900" y2="0">
+        <stop offset="0" stop-color="#f2cc52" stop-opacity="0"/>
+        <stop offset=".28" stop-color="#f2cc52" stop-opacity=".5"/>
+        <stop offset=".5" stop-color="#fff5c8" stop-opacity="1"/>
+        <stop offset=".72" stop-color="#f2cc52" stop-opacity=".5"/>
+        <stop offset="1" stop-color="#f2cc52" stop-opacity="0"/>
+      </linearGradient>
+    </defs>
+    <path d="M 0 200 A 3250 3250 0 0 1 1600 200" fill="none" stroke="#e8d59a" stroke-width="18" stroke-opacity=".2" filter="url(#fg-halo)"/>
+    <path d="M 0 200 A 3250 3250 0 0 1 1600 200" fill="none" stroke="#d6ba6b" stroke-width="4" stroke-opacity=".7" filter="url(#fg-glow)"/>
+    <path d="M 0 200 A 3250 3250 0 0 1 1600 200" fill="none" stroke="#b08a34" stroke-width="1.5"/>
+    <g class="glint">
+      <path d="M 700 101.54 A 3250 3250 0 0 1 900 101.54" fill="none" stroke="url(#fg-glint)" stroke-width="5" stroke-opacity=".25"/>
+      <path d="M 700 101.54 A 3250 3250 0 0 1 900 101.54" fill="none" stroke="url(#fg-glint)" stroke-width="1.8"/>
+    </g>
+  </svg>
+</header>
+<div class="mockflag">MOCKUP · not live</div>
+<main class="page">
+  <div class="dp-top">
+    <img class="dp-icon r" src="/assets/img/app/dovespath-icon.png" alt="The Dove’s Path app icon" width="360" height="360">
+    <h1 class="r s1 dp-wordmark"><img src="/assets/img/app/doves-path-wordmark.svg" alt="Dove’s Path" width="1849" height="243"><span class="tm" aria-label="trademark">™</span></h1>
+    <p class="dp-lines">
+      <span class="r s2">Hear God in <em>His Word</em>.</span>
+      <span class="r s3">Hold on to what <em>He speaks to you</em>.</span>
+      <span class="r s4">In your life &amp;&nbsp;in your work.</span>
+    </p>
+    <a class="story-link r s4" href="/#our-first-app"><span class="chev" aria-hidden="true">«</span> Back to the story <span class="chev" aria-hidden="true">«</span></a>
+  </div>
+</main>
+</div>
+<section class="dp-practice ground-river" data-settle="The practice">
+  <div class="dp-practice-in">
+    <p class="kick r">Lectio Divina · an old practice of the church</p>
+    <p class="dp-big r s1">Dove’s Path walks you through it.</p>
+    <p class="dp-big dp-gold r s2">The Holy Spirit does the speaking.</p>
+    </div>
+  <p class="dp-credit">Painting: Yudianto Prabowo</p>
+</section>
+<section class="ch-app dp-cards" data-settle="Morning to evening">
+  <div class="cards-wrap" data-cards>
+    <div class="cards-stage">
+      <div class="cards-pin">
+        <div class="cards-row">
+          <svg class="arc-line" aria-hidden="true" focusable="false"></svg>
+          <div class="panel" aria-hidden="true"></div>
+          <div class="cards">
+    <article class="card" data-flow="morning">
+      <p class="card-kicker">Morning</p>
+      <h3 class="card-head">Hear one passage, slowly.</h3>
+      <div class="card-phone"><img src="/assets/img/app/morning-01.webp" alt="" width="780" height="1688" loading="lazy" decoding="async"></div>
+      <button type="button" class="card-btn card-plus" aria-expanded="false" aria-label="Show more: Morning"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+      <div class="flow" aria-label="Morning, screen by screen">
+        <img src="/assets/img/app/morning-01.webp" alt="The morning table of seven short steps" width="780" height="1688" loading="lazy" decoding="async">
+        <img src="/assets/img/app/morning-02.webp" alt="The passage read aloud, one verse at a time" width="780" height="1688" loading="lazy" decoding="async">
+        <img src="/assets/img/app/morning-03.webp" alt="Your own words on the passage" width="780" height="1688" loading="lazy" decoding="async">
+      </div>
+    </article>
+    <article class="card" data-flow="day">
+      <p class="card-kicker">Day</p>
+      <h3 class="card-head">Carry what you heard into the working day.</h3>
+      <div class="card-phone"><img src="/assets/img/app/day-01.webp" alt="" width="1200" height="2609" loading="lazy" decoding="async"></div>
+      <button type="button" class="card-btn card-plus" aria-expanded="false" aria-label="Show more: Day"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+      <div class="flow" aria-label="Day, screen by screen">
+        <img src="/assets/img/app/day-01.webp" alt="Ponder: the morning’s thread and memory verse, Psalm 23:2, above a thought kept during the day" width="1200" height="2609" loading="lazy" decoding="async">
+      </div>
+    </article>
+    <article class="card" data-flow="bible">
+      <p class="card-kicker">The Bible</p>
+      <h3 class="card-head">Find any passage, &amp;&nbsp;hear it read.</h3>
+      <div class="card-phone"><img src="/assets/img/app/bible-01.webp" alt="" width="1200" height="2609" loading="lazy" decoding="async"></div>
+      <button type="button" class="card-btn card-plus" aria-expanded="false" aria-label="Show more: The Bible"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+      <div class="flow" aria-label="The Bible, screen by screen">
+        <img src="/assets/img/app/bible-01.webp" alt="Psalm 23 open in the Bible, with the speaker beside the passage name" width="1200" height="2609" loading="lazy" decoding="async">
+        <img src="/assets/img/app/bible-02.webp" alt="Psalm 23 read aloud, verse 2 circled as it is read" width="1200" height="2609" loading="lazy" decoding="async">
+      </div>
+    </article>
+    <article class="card" data-flow="evening">
+      <p class="card-kicker">Evening</p>
+      <h3 class="card-head">Bring the day back to Him.</h3>
+      <div class="card-phone"><img src="/assets/img/app/evening-01.webp" alt="" width="780" height="1688" loading="lazy" decoding="async"></div>
+      <button type="button" class="card-btn card-plus" aria-expanded="false" aria-label="Show more: Evening"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
+      <div class="flow" aria-label="Evening, screen by screen">
+        <img src="/assets/img/app/evening-01.webp" alt="The evening’s four cards" width="780" height="1688" loading="lazy" decoding="async">
+        <img src="/assets/img/app/evening-02.webp" alt="Turning: the day’s words and what weighed on you" width="780" height="1688" loading="lazy" decoding="async">
+        <img src="/assets/img/app/evening-03.webp" alt="One theme picked, and why" width="780" height="1688" loading="lazy" decoding="async">
+        <img src="/assets/img/app/evening-04.webp" alt="The day’s verse, with one question" width="780" height="1688" loading="lazy" decoding="async">
+        <img src="/assets/img/app/evening-05.webp" alt="Answered in your own words" width="780" height="1688" loading="lazy" decoding="async">
+      </div>
+    </article>
+          </div>
+          <div class="obody" hidden>
+            <button type="button" class="card-btn card-x" aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></svg></button>
+            <p class="card-kicker"></p>
+            <h3 class="card-head"></h3>
+            <div class="ophone"><div class="oscreen"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="rm-panel" hidden></div>
+  </div>
+</section>
+<div class="dp-ch dp-ch4" data-settle="The Beta">
+<main class="page dp-rest">
+  <section class="keeps">
+    <h2>What it keeps, &amp;&nbsp;what it doesn’t</h2>
+    <p>Nothing is counted. No one is keeping score. <b>He</b> is keeping you.</p>
+    <p>What you write stays on your phone. You can back it up to your own Dropbox, &amp;&nbsp;export it any time.</p>
+    <p class="small"><a href="/dovespath/privacy">How Dove’s Path handles your records</a></p>
+  </section>
+
+  <section class="beta">
+    <h2>The Beta</h2>
+    <p>Leave your email &amp;&nbsp;we’ll invite you to the Beta when a place opens. </p>
+    <form class="join" onsubmit="return false">
+      <fieldset class="join-phone">
+        <legend>Which phone do you use?</legend>
+        <label><input type="radio" name="phone" value="iphone" required> <span>iPhone — join the Beta</span></label>
+        <label><input type="radio" name="phone" value="android"> <span>Android — coming later</span></label>
+      </fieldset>
+      <div class="join-row">
+      <label class="vh" for="join-email">Email address</label>
+      <input class="join-email" id="join-email" name="email" type="email" placeholder="you@example.com">
+      <button class="btn" type="submit">Sign up for the Beta</button>
+      </div>
+    </form>
+    <p class="small">We’ll only write to you about this phone app. Unsubscribe any time. For ages 13 &amp;&nbsp;up.</p>
+  </section>
+
+  <div class="held"><b>Held, not on the page:</b> the subscription and its price, until it ships. No counts, testimonies or ratings.</div>
+</main>
+<footer>
+  <p><span style="white-space:nowrap">Prothesis LLC</span> – <span style="white-space:nowrap">Greater Chicago area, Illinois</span> – <span style="white-space:nowrap"><a href="mailto:contact@prothesis.net">contact@prothesis.net</a></span> – <span style="white-space:nowrap"><a href="/about">About</a></span> – <span style="white-space:nowrap">© 2026 Prothesis LLC</span> – <span style="white-space:nowrap"><a href="/privacy">Privacy</a></span> – <span style="white-space:nowrap"><a href="mailto:support@dovespath.app">support@dovespath.app</a></span></p>
+</footer>
+</div>
+<script>
+(function(){var els=document.querySelectorAll('.r');
+if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('on')});return}
+var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('on');io.unobserve(x.target)}})},{rootMargin:'0px 0px -12% 0px',threshold:.1});
+els.forEach(function(e){io.observe(e)});
+// The first screen rises on load, not on scroll: its lowest lines sit inside the observer's bottom margin.
+requestAnimationFrame(function(){[].forEach.call(document.querySelectorAll('.dp-ch1 .r'),function(e){e.classList.add('on');io.unobserve(e)})});})();
+</script>
+<script src="/cards.js" defer></script>
+<script src="/screen-dates.js" defer></script>
+<script src="/scroll-settle.js" defer></script>
+</body>
+</html>

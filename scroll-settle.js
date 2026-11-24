@@ -13,7 +13,7 @@
    rather than starting again from still. Off under Reduce Motion, when the page
    is pinch-zoomed, and without JavaScript; the scroll bar still scrolls freely. */
 (function () {
-  var chapters = [].slice.call(document.querySelectorAll('.home .ch, .home .ch-app'));
+  var chapters = [].slice.call(document.querySelectorAll('.home .ch, .home .ch-app, [data-settle]'));
   if (!chapters.length || !window.requestAnimationFrame) return;
   var mqRM = window.matchMedia('(prefers-reduced-motion: reduce)');
   var mqWide = window.matchMedia('(min-width: 1024px)');
@@ -255,6 +255,7 @@
   // (style.css); with Reduce Motion the glint and the page jump.
   function label(ch) {
     var h = ch.querySelector('h2'), logo = ch.querySelector('.logo'), btn = ch.querySelector('.btn');
+    if (ch.getAttribute('data-settle')) return ch.getAttribute('data-settle');   // the Dove’s Path page names its own chapters
     return h ? h.textContent.trim() : logo ? logo.alt : btn ? btn.textContent.trim() : '';
   }
   function toChapter(i) {
@@ -371,7 +372,9 @@
   // frame stutters (Safari draws SVG blurs on the CPU). At either end the line lies exactly on the real one, which takes
   // over: the horizon at the top, the chapter arc from the second chapter on.
   // Not on phones (no chapter arc there) or under Reduce Motion (the chapter arc simply appears with the second chapter).
-  var sky = document.querySelector('.ch-open .firmament'), skyGlint = sky && sky.querySelector('.glint');
+  var sky = document.querySelector('.ch-open .firmament, [data-horizon]'), skyGlint = sky && sky.querySelector('.glint');
+  // The horizon's circle in its viewBox (0 0 1600 220): the home page's is (800, 1700) r 1600; another page may set its own.
+  var SR = (sky && +sky.getAttribute('data-r')) || 1600, SCY = (sky && +sky.getAttribute('data-cy')) || 1700;
   var lift = null, rest1 = 1, skyAt = 0;
   function morphing() { return !!sky && mqWide.matches && !mqRM.matches; }
   function measure() { rest1 = Math.max(1, Math.round(restOf(1))); }   // rounded, as the glide's own target is
@@ -412,7 +415,7 @@
     if (!lift) makeLift();
     // The horizon as it sits on screen now (viewBox 0 0 1600 220, xMidYMax slice; circle (800, 1700), r 1600).
     var r = sky.getBoundingClientRect(), k = Math.max(r.width / 1600, r.height / 220);
-    var R0 = 1600 * k, cy0 = r.top + r.height - 220 * k + 1700 * k, half0 = r.width / 2, end0 = cy0 - Math.sqrt(R0 * R0 - half0 * half0);
+    var R0 = SR * k, cy0 = r.top + r.height - 220 * k + SCY * k, half0 = r.width / 2, end0 = cy0 - Math.sqrt(R0 * R0 - half0 * half0);
     // Where the horizon's glint is sliding right now (it keeps going while the lift is out), so either end matches.
     var m = skyGlint ? getComputedStyle(skyGlint).transform : 'none', v = m.match(/matrix\(([^,]+),\s*([^,]+)/);
     skyAt = v ? Math.atan2(+v[2], +v[1]) : 0;
@@ -426,7 +429,7 @@
     var R = (L * L + bow * bow) / (2 * bow), C = [mx - n[0] * (R - bow), my - n[1] * (R - bow)], ends = Math.asin(Math.min(1, L / R));
     var arc = seg(C, R, n, d, ends, -ends).d;
     // The glint, by distance along the arc from its apex: from the horizon's to the chapter arc's own place.
-    var s = mix(-skyAt * R0, G.R * (theta === null ? at(1) : theta), t), g = mix(0.0625 * R0, 30, t), gl = seg(C, R, n, d, (s + g) / R, (s - g) / R);
+    var s = mix(-skyAt * R0, G.R * (theta === null ? at(1) : theta), t), g = mix(100 * k, 30, t), gl = seg(C, R, n, d, (s + g) / R, (s - g) / R);
     lift.svg.setAttribute('width', W); lift.svg.setAttribute('height', H); lift.svg.style.display = 'block';
     // The glint's blurs only as wide as its strokes need: a whole-window filter region would be redrawn every frame.
     var gm = seg(C, R, n, d, s / R, s / R).p;

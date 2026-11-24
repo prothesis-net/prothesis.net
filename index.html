@@ -14,6 +14,25 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="stylesheet" href="/style.css">
 <script>document.documentElement.classList.add('js')</script>
+<style>
+/* Arc transition to the Dove's Path page (mockup 2026-11-24, not approved): the gold arc carries you across. */
+@view-transition { navigation: auto; }
+::view-transition-group(dp-arc) { animation-duration: 1s; animation-timing-function: cubic-bezier(.2,.6,.2,1); }
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: .8s; }
+@media (prefers-reduced-motion: reduce) { ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; } }
+.app-beats { margin-top: 30px; font-size: clamp(20px, 2.2vw, 28px); line-height: 1.35; color: var(--linen); text-wrap: balance; }
+.app-beats span { display: block; }
+.arch { display: block; width: min(1180px, calc(100% - 48px)); margin: 28px auto 56px; text-decoration: none; color: var(--linen); cursor: pointer; }
+.app-arc { display: block; width: 100%; height: auto; overflow: visible; view-transition-name: dp-arc; transition: transform .5s cubic-bezier(.2,.6,.2,1); }
+.arch-words { display: block; margin-top: -2.6vw; font-weight: 700; font-size: clamp(26px, 3.6vw, 46px); line-height: 1.15; transition: color .4s ease; }
+.arch .chev { color: var(--gold); display: inline-block; position: relative; top: -.09em; transition: transform .5s cubic-bezier(.2,.6,.2,1); }
+.arch:hover .app-arc, .arch:focus-visible .app-arc { transform: translateY(-6px); }
+.arch:hover .arch-words, .arch:focus-visible .arch-words { color: var(--gold); }
+.arch:hover .chev { transform: translateX(6px); }
+.arch:focus { outline: none; }
+.arch:focus-visible .arch-words { text-decoration: underline; text-underline-offset: 8px; }
+@media (prefers-reduced-motion: reduce) { .app-arc, .arch .chev { transition: none; } .arch:hover .app-arc, .arch:hover .chev { transform: none; } }
+</style>
 </head>
 <body class="home">
 <main>
@@ -113,76 +132,17 @@
 <section class="ch-app" id="our-first-app">
   <div class="inner app-intro">
     <h2 class="sec r">Our first app: Dove’s Path</h2>
-    <p class="lead r s1">Our first app, for the phone, is made for that morning shift: to help you enter His rest by carrying His Word across the arc of the day. It is coming soon.</p>
+    <p class="lead r s1">Our first app, for the phone, is made for that morning shift:<br>To help you enter His rest by carrying His Word across the arc of the day.<br>It is coming soon.</p>
+    <p class="app-beats r s1"><span>At the start of your day, at least fifteen minutes in one passage.</span> <span>His Word, heard personally in the heart.</span></p>
   </div>
 
-  <div class="cards-wrap" data-cards>
-    <div class="cards-stage">
-      <div class="cards-pin">
-        <div class="cards-row">
-          <svg class="arc-line" aria-hidden="true" focusable="false"></svg>
-          <div class="panel" aria-hidden="true"></div>
-          <div class="cards">
-    <article class="card" data-flow="morning">
-      <p class="card-kicker">Morning</p>
-      <h3 class="card-head">Hear one passage, slowly.</h3>
-      <div class="card-phone"><img src="/assets/img/app/morning-01.webp" alt="" width="780" height="1688" loading="lazy" decoding="async"></div>
-      <button type="button" class="card-btn card-plus" aria-expanded="false" aria-label="Show more: Morning"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
-      <div class="flow" aria-label="Morning, screen by screen">
-        <img src="/assets/img/app/morning-01.webp" alt="The morning table of seven short steps" width="780" height="1688" loading="lazy" decoding="async">
-        <img src="/assets/img/app/morning-02.webp" alt="The passage read aloud, one verse at a time" width="780" height="1688" loading="lazy" decoding="async">
-        <img src="/assets/img/app/morning-03.webp" alt="Your own words on the passage" width="780" height="1688" loading="lazy" decoding="async">
-      </div>
-    </article>
-    <article class="card" data-flow="day">
-      <p class="card-kicker">Day</p>
-      <h3 class="card-head">Carry what you heard into the working day.</h3>
-      <div class="card-phone"><img src="/assets/img/app/day-01.webp" alt="" width="1200" height="2609" loading="lazy" decoding="async"></div>
-      <button type="button" class="card-btn card-plus" aria-expanded="false" aria-label="Show more: Day"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
-      <div class="flow" aria-label="Day, screen by screen">
-        <img src="/assets/img/app/day-01.webp" alt="Ponder: the morning’s thread and memory verse, Psalm 23:2, above a thought kept during the day" width="1200" height="2609" loading="lazy" decoding="async">
-      </div>
-    </article>
-    <article class="card" data-flow="bible">
-      <p class="card-kicker">The Bible</p>
-      <h3 class="card-head">Find any passage, &amp;&nbsp;hear it read.</h3>
-      <div class="card-phone"><img src="/assets/img/app/bible-01.webp" alt="" width="1200" height="2609" loading="lazy" decoding="async"></div>
-      <button type="button" class="card-btn card-plus" aria-expanded="false" aria-label="Show more: The Bible"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
-      <div class="flow" aria-label="The Bible, screen by screen">
-        <img src="/assets/img/app/bible-01.webp" alt="Psalm 23 open in the Bible, with the speaker beside the passage name" width="1200" height="2609" loading="lazy" decoding="async">
-        <img src="/assets/img/app/bible-02.webp" alt="Psalm 23 read aloud, verse 2 circled as it is read" width="1200" height="2609" loading="lazy" decoding="async">
-      </div>
-    </article>
-    <article class="card" data-flow="evening">
-      <p class="card-kicker">Evening</p>
-      <h3 class="card-head">Bring the day back to Him.</h3>
-      <div class="card-phone"><img src="/assets/img/app/evening-01.webp" alt="" width="780" height="1688" loading="lazy" decoding="async"></div>
-      <button type="button" class="card-btn card-plus" aria-expanded="false" aria-label="Show more: Evening"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button>
-      <div class="flow" aria-label="Evening, screen by screen">
-        <img src="/assets/img/app/evening-01.webp" alt="The evening’s four cards" width="780" height="1688" loading="lazy" decoding="async">
-        <img src="/assets/img/app/evening-02.webp" alt="Turning: the day’s words and what weighed on you" width="780" height="1688" loading="lazy" decoding="async">
-        <img src="/assets/img/app/evening-03.webp" alt="One theme picked, and why" width="780" height="1688" loading="lazy" decoding="async">
-        <img src="/assets/img/app/evening-04.webp" alt="The day’s verse, with one question" width="780" height="1688" loading="lazy" decoding="async">
-        <img src="/assets/img/app/evening-05.webp" alt="Answered in your own words" width="780" height="1688" loading="lazy" decoding="async">
-      </div>
-    </article>
-          </div>
-          <div class="obody" hidden>
-            <button type="button" class="card-btn card-x" aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></svg></button>
-            <p class="card-kicker"></p>
-            <h3 class="card-head"></h3>
-            <div class="ophone"><div class="oscreen"></div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="rm-panel" hidden></div>
-  </div>
+  <a class="arch r s2" href="/dovespath/">
+    <svg class="app-arc" viewBox="0 0 1600 110" aria-hidden="true" focusable="false">
+      <path d="M 0 105 A 3250 3250 0 0 1 1600 105" fill="none" stroke="#d6ba6b" stroke-width="2" vector-effect="non-scaling-stroke"/>
+    </svg>
+    <span class="arch-words"><span class="chev" aria-hidden="true">»</span> Come &amp;&nbsp;See Dove’s Path <span class="chev" aria-hidden="true">»</span></span>
+  </a>
 
-  <div class="inner app-after">
-    <p class="lead r">At least fifteen minutes, in one passage. An old practice of the church, Lectio Divina: Scripture read slowly &amp;&nbsp;heard, made simple for today, so anyone can hear His Word personally, in the heart. The app walks you through it. The Holy Spirit does the speaking.</p>
-    <p class="lead r">The app helps you hold on to what you heard &amp;&nbsp;carry it across the working day.</p>
-  </div>
 </section>
 
 <section class="ch ch-drawn">
