@@ -129,6 +129,11 @@ h1, .d2, .d3, .q, .sec { text-wrap: balance; }
 .ch-open .tagline { font-size: clamp(18px, 1.8vw, 24px); }
 .top-link { position: absolute; top: 18px; right: 24px; z-index: 2; display: inline-block; padding: 12px 4px; font-size: 14px; letter-spacing: .12em; text-decoration: none; color: var(--linen); }
 .top-link:hover { text-decoration: underline; }
+.top-nav { position: absolute; top: 18px; right: 24px; z-index: 2; display: flex; align-items: center; gap: 22px; }
+.top-nav .top-link { position: static; }
+.top-dp { display: inline-flex; align-items: center; }
+.top-dp img { display: block; height: 15px; width: auto; opacity: .92; transition: opacity .2s ease; }
+.top-dp:hover img, .top-dp:focus-visible img { opacity: 1; }
 
 /* The golden arc */
 .firmament { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 30vh; min-height: 170px; z-index: 0; pointer-events: none; }
@@ -404,6 +409,8 @@ footer a { color: inherit; }
   .cards-wrap { padding: 0 16px; margin-top: 48px; }
   .btn { padding: 18px 30px; }
   .top-link { right: 16px; top: 10px; }
+  .top-nav { right: 16px; top: 10px; gap: 16px; }
+  .top-dp img { height: 13px; }
   .fine a, footer a { display: inline-block; padding: 10px 4px; margin: -10px -4px; }
   .art-credit { right: 16px; bottom: 12px; }
 
